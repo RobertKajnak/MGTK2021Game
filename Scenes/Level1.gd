@@ -44,11 +44,13 @@ func toggle_pause():
 
 func unpause(silent = false):
 	if not silent:
+		$BGSound.stream_paused = false;
 		print_info('Game Unpaused')
 	paused = false
 
 func pause(silent = false):
 	if not silent:
+		$BGSound.stream_paused = true;
 		print_info('Game Paused')
 	paused = true
 
@@ -111,4 +113,11 @@ func _notification(what):
 func _on_Button_pressed():
 	if not paused:
 		Global.Score += 100
+		playEffect("puff.wav",0.5)
 		refresh_HUD()
+		
+func playEffect(effect, offset):
+	var effectPlayer = AudioStreamPlayer.new()
+	self.add_child(effectPlayer)
+	effectPlayer.stream = load("res://res/sounds/" + effect)
+	effectPlayer.play(offset)

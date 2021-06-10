@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Level1.gd" type="Script" id=1]
 [ext_resource path="res://res/fonts/FontLargeText.tres" type="DynamicFont" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://res/fonts/FontPleasantText.tres" type="DynamicFont" id=9]
 [ext_resource path="res://res/fonts/FontPleasantItalic.tres" type="DynamicFont" id=10]
 [ext_resource path="res://res/fonts/FontPleasantBold.tres" type="DynamicFont" id=11]
+[ext_resource path="res://res/sounds/chill.wav" type="AudioStream" id=12]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -140,4 +141,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BGSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+autoplay = true
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
