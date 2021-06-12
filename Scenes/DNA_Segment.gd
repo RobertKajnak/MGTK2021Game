@@ -3,9 +3,8 @@ extends VBoxContainer
 
 var letters setget set_letters, get_letters
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 func set_letters(letters:String):
 	for i in range(len(letters)):
@@ -30,8 +29,3 @@ func set_letters(letters:String):
 func get_letters():
 	return $LetterContainer/Letter1.text + $LetterContainer/Letter2.text +\
 		$LetterContainer/Letter3.text
-		
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

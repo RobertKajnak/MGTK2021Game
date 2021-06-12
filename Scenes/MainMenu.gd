@@ -1,17 +1,12 @@
 extends Control
 
 func _ready():
-	
-	get_tree().change_scene("res://Scenes/Level2.tscn")
-	pass # Replace with function body.
+	# TODO remove this before launch
+	get_tree().change_scene("res://Scenes/Level2.tscn") 
+	pass
 
 func _on_ButtonStart_pressed():
 	get_tree().change_scene("res://Scenes/Level2.tscn")
-
-
-func _on_ButtonOptions_pressed():
-	pass # Replace with function body.
-
 
 func _on_ButtonExit_pressed():
 	exit_game()
@@ -19,7 +14,7 @@ func _on_ButtonExit_pressed():
 func exit_game():
 	get_tree().quit()
 
-#%% Input handling
+# Input handling
 func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.pressed:
@@ -28,12 +23,8 @@ func _unhandled_input(event):
 				
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
-		# For Windows, if 'x' is clicked, alt-f4 etc.
-		pass
-	elif what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST: 
-		# For android
 		exit_game()
-		
+	elif what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST: 
+		exit_game()
 	elif what == MainLoop.NOTIFICATION_WM_FOCUS_IN or what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
-		#Pause
 		pass

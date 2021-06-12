@@ -7,12 +7,14 @@
 position = Vector2( 394.377, 527.515 )
 script = ExtResource( 2 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( 0.125349, 0 )
-scale = Vector2( 1.00619, 1 )
-polygon = PoolVector2Array( 14.5218, -16.2786, 9.22449, -12.0407, 7.37042, -3.82991, -4.0188, 0.937683, -7.99179, 11.0026, -12.2296, 17.8891, -8.25665, 18.1539, -6.40259, 13.6512, -3.22421, 2.79173, 6.31097, -0.65152, 10.0191, -4.62451, 11.8731, -10.7164 )
-
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.342049, 0.68335 )
 scale = Vector2( 0.339378, 0.36125 )
 texture = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0.125336, 0 )
+scale = Vector2( 1.00619, 1 )
+polygon = PoolVector2Array( 14.5218, -16.2786, 9.22449, -12.0407, 7.37042, -3.82991, -4.59891, 1.35999, -7.99179, 11.0026, -12.9845, 18.485, -8.63641, 18.61, -6.40259, 13.6512, -3.22421, 2.79173, 6.31097, -0.65152, 10.0191, -4.62451, 11.8731, -10.7164 )
+
+[connection signal="body_entered" from="." to="." method="_on_RNA_body_entered"]

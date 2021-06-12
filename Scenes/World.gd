@@ -12,26 +12,25 @@ var fogTexture = ImageTexture.new()
 var lightImage = LightTexture.get_data()
 var light_offset = Vector2(LightTexture.get_width()/2, LightTexture.get_height()/2)
 
-
-var frame = 0
-
-onready var player_position = $Player.position #For having a more efficient fog movement
+# For having a more efficient fog movement 
+# Only update the fog if the player has moved
+onready var player_position = $Player.position 
 
 func _ready():
 	randomize()
 	var fog_image_width = display_width
 	var fog_image_height = display_height
-	Global.genome = Global.index_to_gene[6]+Global.index_to_gene[0]+Global.index_to_gene[2]
+	Global.genome = Global.index_to_gene[6] + Global.index_to_gene[0] + Global.index_to_gene[2]
 	$HUD.refresh()
 	
 	fogImage.create(fog_image_width, fog_image_height, false, Image.FORMAT_RGBAH)
 	fogImage.fill(Color.black)
 	lightImage.convert(Image.FORMAT_RGBAH)
 	
-	#Spawn random RNA Fragments
+	# Spawn random RNA Fragments
 	for i in range(6 + randi()%4):
 		var rna_obj = load("res://Scenes/RNA_Object.tscn").instance()
-		#Check here for overlaps with objects
+		# Check here for overlaps with objects
 		rna_obj.position = Vector2(100+randi()%1150,50+randi()%660)
 		$RNA_nodes.add_child(rna_obj)
 	
@@ -51,36 +50,21 @@ func update_fog(new_grid_position):
 	lightImage.unlock()
 	update_fog_image_texture()
 
-
 func update_fog_image_texture():
 	fogTexture.create_from_image(fogImage)
 	fog.texture = fogTexture
 
-
 func _physics_process(delta):
-	#Only updates the flag, if the player has moved
+	# Only updates the flag, if the player has moved
 	if $Player.position != player_position:
-		#print('calcing', frame)
-		if $Player.position.distance_to(player_position)>0.1:
+		if $Player.position.distance_to(player_position) > 0.1:
 			update_fog($Player.position)
 		player_position = $Player.position
-		
-	for rna in $RNA_nodes.get_children():
-		if $Player.position.distance_to(rna.position)<30:
-			$RNA_nodes.remove_child(rna)
-			Global.genome += rna.letter
-			$HUD.refresh()
-	frame+=1
-
-func _input(event):
-	pass
-	
-	#update_fog($Player.position)
 
 func exit_game():
 	get_tree().quit()
 
-#%% Input handling
+# Input handling
 func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.pressed:

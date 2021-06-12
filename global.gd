@@ -1,5 +1,6 @@
 extends Node
 
+var hud_index = 0 # Used to update the HUD during collisions
 
 var current_level = 1
 var HP = 100
@@ -7,9 +8,7 @@ var Score = 0;
 var genome = ""
 
 var letters_possible = ['A', 'T', 'G']
-var letter_to_color = {'A':Color.red,
-						'T': Color.green,
-						'G': Color.yellow}
+var letter_to_color = { 'A': Color.red, 'T': Color.green, 'G': Color.yellow }
 
 var index_to_property_and_color = [
 ["Movement",Color.orange],
@@ -45,10 +44,7 @@ var index_to_gene = []
 var index_to_color = []
 var gene_to_index = {}
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	var sc = len(letters_possible)
 	for i in range(len(index_to_property_and_color)):
 		var combo = letters_possible[i/sc/sc%sc] + letters_possible[i/sc%sc] + letters_possible[i%sc]
@@ -61,8 +57,7 @@ func reset_stats(level:int):
 	if level == 1:
 		HP = 100
 		Score = 0
-
-
+		
 func clear_children(node):
 	for n in node.get_children():
 		node.remove_child(n)
