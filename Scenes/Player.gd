@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var velocity = Vector2.ZERO
 export (int) var speed = 150
+const JUMP_DISTANCE = 800
 export (float) var acceleration = 0.5
 export (float) var friction = 0.1
 
@@ -21,14 +22,47 @@ func _physics_process(delta):
 	
 
 func get_input(traits):
-	var can_move = traits.has(Global.Trait.Movement)
-	var is_fast = traits.has(Global.Trait.Speed)
+	regular_move(traits)
+	jump_move(traits)
+	
+func jump_move(traits):
+	var can_jump = traits.has(Global.Trait.Jump)
 	var inverse_movement = traits.has(Global.Trait.Inverse_Movement)
+	
+	var unit = JUMP_DISTANCE if not inverse_movement else -JUMP_DISTANCE
 	
 	var input_dir_x = 0
 	var input_dir_y = 0
 	
+	if can_jump and Input.is_action_pressed("jump"):
+		if Input.is_action_pressed("right"):
+			input_dir_x += unit
+		if Input.is_action_pressed("left"):
+			input_dir_x -= unit
+		if Input.is_action_pressed("up"):
+			input_dir_y -= unit
+		if Input.is_action_pressed("down"):
+			input_dir_y += unit
+	
+		if input_dir_x != 0:
+			velocity.x = lerp(velocity.x, input_dir_x, acceleration)
+		else:
+			velocity.x = lerp(velocity.x, 0, friction)
+
+		if input_dir_y != 0:
+			velocity.y = lerp(velocity.y, input_dir_y, acceleration)
+		else:
+			velocity.y = lerp(velocity.y, 0, friction)
+	
+func regular_move(traits):
+	var can_move = traits.has(Global.Trait.Movement)
+	var is_fast = traits.has(Global.Trait.Speed)
+	var inverse_movement = traits.has(Global.Trait.Inverse_Movement)
+	
 	var unit = 1 if not inverse_movement else -1
+	
+	var input_dir_x = 0
+	var input_dir_y = 0
 	
 	if can_move:
 		if Input.is_action_pressed("right"):

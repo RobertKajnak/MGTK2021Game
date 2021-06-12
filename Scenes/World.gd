@@ -23,8 +23,8 @@ func _ready():
 	var fog_image_width = display_width
 	var fog_image_height = display_height
 	Global.genome = \
-		Global.trait_to_gene[Global.Trait.Speed] + \
 		Global.trait_to_gene[Global.Trait.Movement] + \
+		Global.trait_to_gene[Global.Trait.Jump] + \
 		Global.trait_to_gene[Global.Trait.Sight]
 	$HUD.refresh()
 	
