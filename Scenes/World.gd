@@ -31,7 +31,7 @@ func _ready():
 	lightImage.convert(Image.FORMAT_RGBAH)
 	
 	# Spawn random RNA Fragments
-	for i in range(6 + randi()%4):
+	for i in range(6 + randi()%10):
 		var rna_obj = load("res://Scenes/RNA_Object.tscn").instance()
 		# Check here for overlaps with objects (álmodj királylány)
 		rna_obj.position = Vector2(100+randi()%1150,50+randi()%660)

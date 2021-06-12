@@ -6,11 +6,13 @@ export (float) var acceleration = 0.5
 export (float) var friction = 0.1
 
 func _physics_process(delta):
-	get_input() # Gyuri: nem szuper h minden updatenel meghivjuk
-	velocity = move_and_slide(velocity)
-
-func get_input():
 	var traits = Global.get_traits()
+	$PlayerTexture.visible = not traits.has(Global.Trait.Chameleon)
+	get_input(traits) # Gyuri: nem szuper h minden updatenel meghivjuk
+	velocity = move_and_slide(velocity)
+	
+
+func get_input(traits):
 	var can_move = traits.has(Global.Trait.Movement)
 	var is_fast = traits.has(Global.Trait.Speed)
 	var inverse_movement = traits.has(Global.Trait.Inverse_Movement)
