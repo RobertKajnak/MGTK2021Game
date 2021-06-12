@@ -11,7 +11,7 @@ func _ready():
 
 func _on_RNA_body_entered(body):
 	Global.add_gene(letter)
-	hub.refresh() # Gyuri: idonkent olyan objektum kerul ide aminek nincs refresh
+	hub.refresh()
 	queue_free()
 
 func get_hub():
