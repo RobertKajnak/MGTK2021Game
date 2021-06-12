@@ -8,6 +8,14 @@ export (float) var friction = 0.1
 func _physics_process(delta):
 	var traits = Global.get_traits()
 	$PlayerTexture.visible = not traits.has(Global.Trait.Chameleon)
+	var is_giant = traits.has(Global.Trait.Giant)
+	if is_giant:
+		$PlayerCollision.set_scale(Vector2(2,2))
+		$PlayerTexture.set_scale(Vector2(1.176,1.29))
+	else:
+		$PlayerCollision.set_scale(Vector2(1,1))
+		# Ezt igy kell csinalni, de vigyazat, sprite texture csere eseten elromlik (from Andor with love)
+		$PlayerTexture.set_scale(Vector2(0.588,0.645))
 	get_input(traits) # Gyuri: nem szuper h minden updatenel meghivjuk
 	velocity = move_and_slide(velocity)
 	

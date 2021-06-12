@@ -1,6 +1,8 @@
 extends Node2D
 
 const LightTexture = preload("res://res/textures/Light.png")
+const NORMAL_SIGHT_MULTIPLIER = 2
+const SHORT_SIGHT_MULTIPLIER = 0.5
 
 onready var fog = $Fog
 
@@ -23,7 +25,7 @@ func _ready():
 	Global.genome = \
 		Global.trait_to_gene[Global.Trait.Speed] + \
 		Global.trait_to_gene[Global.Trait.Movement] + \
-		Global.trait_to_gene[Global.Trait.Absorption]
+		Global.trait_to_gene[Global.Trait.Sight]
 	$HUD.refresh()
 	
 	fogImage.create(fog_image_width, fog_image_height, false, Image.FORMAT_RGBAH)
@@ -43,13 +45,21 @@ func _ready():
 		plant.position = Vector2(100+randi()%1150,50+randi()%660)
 		$Plant_nodes.add_child(plant)
 		
+	var traits = Global.get_traits()
+	var has_sight = traits.has(Global.Trait.Sight)
+	update_vision_radius(NORMAL_SIGHT_MULTIPLIER if has_sight else SHORT_SIGHT_MULTIPLIER)
 	update_fog($Player.position)
 	
 func update_vision_radius(new_radius):
-	lightImage.resize(lightImage.get_size()*new_radius)
-	light_offset = Vector2(LightTexture.get_width()/2, LightTexture.get_height()/2)
+	lightImage.resize(lightImage.get_width()*new_radius, lightImage.get_height()*new_radius)
+	light_offset = Vector2(LightTexture.get_width()/2*new_radius, LightTexture.get_height()/2*new_radius)
 
 func update_fog(new_grid_position):
+	var traits = Global.get_traits()
+	var has_long_sight = traits.has(Global.Trait.Long_Vision)
+	fog.visible = not has_long_sight
+	if has_long_sight:
+		return
 	fogImage.lock()
 	lightImage.lock()
 	
