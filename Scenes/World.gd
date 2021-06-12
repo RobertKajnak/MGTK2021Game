@@ -20,7 +20,10 @@ func _ready():
 	randomize()
 	var fog_image_width = display_width
 	var fog_image_height = display_height
-	Global.genome = Global.index_to_gene[6] + Global.index_to_gene[0] + Global.index_to_gene[1]
+	Global.genome = \
+		Global.trait_to_gene[Global.Trait.Speed] + \
+		Global.trait_to_gene[Global.Trait.Movement] + \
+		Global.trait_to_gene[Global.Trait.Absorption]
 	$HUD.refresh()
 	
 	fogImage.create(fog_image_width, fog_image_height, false, Image.FORMAT_RGBAH)

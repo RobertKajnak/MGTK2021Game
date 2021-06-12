@@ -12,9 +12,8 @@ func set_letters(letters:String):
 		$LetterContainer.find_node('Letter'+str(i+1)).visible = false
 		
 	if len(letters) == 3:
-		var index = Global.gene_to_index[letters]
-		var trait = Global.index_to_trait[index]
-		var color = Global.index_to_color[index]
+		var trait = Global.gene_to_trait[letters]
+		var color = Global.trait_to_color(trait)
 		$DNAProperty.set_text(Global.trait_to_text(trait))
 		$DNAIcon.set_modulate(color)
 		$DNAProperty.set_modulate(color)

@@ -15,12 +15,12 @@ var letter_to_color = { 'A': Color.red, 'T': Color.green, 'G': Color.yellow }
 enum Trait { 
 	Movement, Speed, Absorption, Photosynthesis, Digestion, Water_Survival, 
 	Sight, Long_Vision, Sense_Cells, Poo_Eating, Virus, Water_Storage, 
-	Better_Core, Double_Core, Combustion, Nothing, Inverse_Movement, 
-	Unstable_DNA, Giant, Color_Change, Chameleon, Halucination, 
-	Photosensibility, Jump
+	Better_Core, Double_Core, Combustion, Nothing1, Nothing2, Nothing3, 
+	Nothing4, Inverse_Movement, Unstable_DNA, Giant, Color_Change, Chameleon, 
+	Halucination, Photosensibility, Jump
 	}
 
-func trait_to_text(trait):
+func trait_to_text(trait: int):
 	match trait:
 		Trait.Movement: return "Movement"
 		Trait.Speed: return "Speed"
@@ -37,7 +37,10 @@ func trait_to_text(trait):
 		Trait.Better_Core: return "Better Core" 
 		Trait.Double_Core: return "Double Core" 
 		Trait.Combustion: return "Combustion" 
-		Trait.Nothing: return "Nothing" 
+		Trait.Nothing1: return "Nothing" 
+		Trait.Nothing2: return "Nothing" 
+		Trait.Nothing3: return "Nothing" 
+		Trait.Nothing4: return "Nothing" 
 		Trait.Inverse_Movement: return "Inverse Movement" 
 		Trait.Unstable_DNA: return "Unstable DNA" 
 		Trait.Giant: return "Giant" 
@@ -47,49 +50,49 @@ func trait_to_text(trait):
 		Trait.Photosensibility: return "Photosensibility" 
 		Trait.Jump: return "Jump"
 
-var index_to_trait_and_color = [
-[Trait.Movement ,Color.orange],
-[Trait.Speed, Color.orange],
-[Trait.Absorption, Color.white],
-[Trait.Photosynthesis, Color.green],
-[Trait.Digestion, Color.aquamarine],
-[Trait.Water_Survival, Color.aqua],
-[Trait.Sight, Color.blue],
-[Trait.Long_Vision, Color.blue],
-[Trait.Sense_Cells, Color.blue],
-[Trait.Poo_Eating, Color.aquamarine],
-[Trait.Virus, Color.red],
-[Trait.Water_Storage, Color.aqua],
-[Trait.Better_Core, Color.black],
-[Trait.Double_Core, Color.black],
-[Trait.Combustion, Color.red],
-[Trait.Nothing, Color.gray],
-[Trait.Nothing, Color.gray],
-[Trait.Nothing, Color.gray],
-[Trait.Nothing, Color.gray],
-[Trait.Inverse_Movement, Color.orange],
-[Trait.Unstable_DNA, Color.red],
-[Trait.Giant, Color.gray],
-[Trait.Color_Change, Color.gray],
-[Trait.Chameleon, Color.gray],
-[Trait.Halucination, Color.blue],
-[Trait.Photosensibility, Color.red],
-[Trait.Jump, Color.orange]]
-
-var index_to_trait = []
-var index_to_gene = []
-var index_to_color = []
-var gene_to_index = {}
+func trait_to_color(trait: int): 
+	match trait:
+		Trait.Movement: return Color.orange
+		Trait.Speed: return Color.orange
+		Trait.Absorption: return Color.white
+		Trait.Photosynthesis: return Color.green
+		Trait.Digestion: return Color.aquamarine
+		Trait.Water_Survival: return Color.aqua
+		Trait.Sight: return Color.blue
+		Trait.Long_Vision: return Color.blue
+		Trait.Sense_Cells: return Color.blue
+		Trait.Poo_Eating: return Color.aquamarine
+		Trait.Virus: return Color.red
+		Trait.Water_Storage: return Color.aqua
+		Trait.Better_Core: return Color.black
+		Trait.Double_Core: return Color.black
+		Trait.Combustion: return Color.red
+		Trait.Nothing1: return Color.gray
+		Trait.Nothing2: return Color.gray
+		Trait.Nothing3: return Color.gray
+		Trait.Nothing4: return Color.gray
+		Trait.Inverse_Movement: return Color.orange
+		Trait.Unstable_DNA: return Color.red
+		Trait.Giant: return Color.gray
+		Trait.Color_Change: return Color.gray
+		Trait.Chameleon: return Color.gray
+		Trait.Halucination: return Color.blue
+		Trait.Photosensibility: return Color.red
+		Trait.Jump: return Color.orange
+		
+var trait_to_gene = []
+var gene_to_trait = {}
 
 func _ready():
 	var sc = len(letters_possible)
-	for i in range(len(index_to_trait_and_color)):
-		var combo = letters_possible[i/sc/sc%sc] + letters_possible[i/sc%sc] + letters_possible[i%sc]
-		index_to_gene.append(combo)
-		gene_to_index[combo] = i
-		index_to_color.append(index_to_trait_and_color[i][1])
-		index_to_trait.append(index_to_trait_and_color[i][0])
-
+	
+	for i in range(Trait.size()):
+		var combo = \
+			letters_possible[i/sc/sc%sc] + \
+			letters_possible[i/sc%sc] + \
+			letters_possible[i%sc]
+		trait_to_gene.append(combo)
+		gene_to_trait[combo] = i
 
 func reset_stats(level:int):
 	if level == 1:
@@ -115,8 +118,10 @@ func get_traits():
 	for letters in sliding_window_of(3, genome):
 		var gene = array_to_string(letters)
 		if len(gene) == 3:
-			traits.append(index_to_trait[gene_to_index[gene]])
+			traits.append(gene_to_trait[gene])
 	return traits
+
+# --- Utility Functions ---
 
 # Example: sliding_window_of(2, "ASDFG") == [[A, S], [D, F], [G]]
 func sliding_window_of(n: int, array):
