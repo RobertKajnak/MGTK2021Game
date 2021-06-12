@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://res/textures/RNS.png" type="Texture" id=2]
+[ext_resource path="res://res/textures/kaja_1.png" type="Texture" id=3]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="RNA" type="Area2D" parent="."]
+position = Vector2( 394.377, 527.515 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RNA"]
+position = Vector2( 0.125349, 0 )
+scale = Vector2( 1.00619, 1 )
+polygon = PoolVector2Array( 14.5218, -16.2786, 9.22449, -12.0407, 7.37042, -3.82991, -4.0188, 0.937683, -7.99179, 11.0026, -12.2296, 17.8891, -8.25665, 18.1539, -6.40259, 13.6512, -3.22421, 2.79173, 6.31097, -0.65152, 10.0191, -4.62451, 11.8731, -10.7164 )
+
+[node name="Sprite" type="Sprite" parent="RNA"]
+position = Vector2( 0.342049, 0.68335 )
+scale = Vector2( 0.339378, 0.36125 )
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 1161.19, 461.479 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( -2.15845, -14.3723, -13.3831, 1.06158, 0.367065, 14.8117, 14.3978, 0.500336 )
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+position = Vector2( 3.71338, 1.17413 )
+scale = Vector2( 0.476749, 0.381612 )
+texture = ExtResource( 3 )
+
+[node name="KinematicBody2D" parent="." instance=ExtResource( 1 )]
