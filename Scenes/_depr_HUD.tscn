@@ -1,0 +1,106 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://res/fonts/FontPleasantText.tres" type="DynamicFont" id=1]
+[ext_resource path="res://res/fonts/FontPleasantBold.tres" type="DynamicFont" id=2]
+[ext_resource path="res://res/fonts/FontLargeText.tres" type="DynamicFont" id=3]
+[ext_resource path="res://res/fonts/FontPleasantItalic.tres" type="DynamicFont" id=4]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="ContainerStats" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 109.317
+margin_top = -194.501
+margin_right = 387.317
+margin_bottom = -110.501
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContainerHP" type="HBoxContainer" parent="ContainerStats"]
+margin_right = 235.0
+margin_bottom = 84.0
+custom_constants/separation = 6
+
+[node name="LabelHP" type="Label" parent="ContainerStats/ContainerHP"]
+margin_top = 16.0
+margin_right = 65.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 3 )
+text = "HP:"
+
+[node name="LabelHPValue" type="Label" parent="ContainerStats/ContainerHP"]
+margin_left = 71.0
+margin_top = 16.0
+margin_right = 71.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 3 )
+
+[node name="VSeparator" type="VSeparator" parent="ContainerStats/ContainerHP"]
+margin_left = 77.0
+margin_right = 106.0
+margin_bottom = 84.0
+custom_constants/separation = 29
+
+[node name="LabelScore" type="Label" parent="ContainerStats/ContainerHP"]
+margin_left = 112.0
+margin_top = 16.0
+margin_right = 229.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 3 )
+text = "Score:"
+
+[node name="LabelScoreValue" type="Label" parent="ContainerStats/ContainerHP"]
+margin_left = 235.0
+margin_top = 16.0
+margin_right = 235.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 3 )
+
+[node name="LabelMessage" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 3 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelHelp" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -429.0
+margin_top = -466.0
+margin_right = 429.0
+margin_bottom = -169.0
+grow_horizontal = 2
+custom_fonts/italics_font = ExtResource( 4 )
+custom_fonts/bold_font = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelHintHK" type="Label" parent="."]
+margin_left = 1741.0
+margin_top = 17.0
+margin_right = 1909.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 3 )
+text = "H - help"
+__meta__ = {
+"_edit_use_anchors_": false
+}

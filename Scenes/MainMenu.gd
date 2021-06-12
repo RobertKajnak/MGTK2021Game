@@ -1,6 +1,8 @@
 extends Control
 
 func _ready():
+	
+	get_tree().change_scene("res://Scenes/Level2.tscn")
 	pass # Replace with function body.
 
 func _on_ButtonStart_pressed():
