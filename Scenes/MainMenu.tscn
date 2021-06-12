@@ -26,10 +26,10 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 860.0
-margin_top = 345.0
-margin_right = 1060.0
-margin_bottom = 735.0
+margin_left = 440.0
+margin_top = 165.0
+margin_right = 640.0
+margin_bottom = 555.0
 custom_constants/separation = 75
 
 [node name="ButtonStart" type="TextureButton" parent="CenterContainer/VBoxContainer"]
