@@ -5,8 +5,8 @@ var hud_index := 0 # Used to update the HUD during collisions
 var current_level := 1
 
 # Player stuff
-var HP := 100
-var Score := 0
+var energy := 50
+var hydration := 50
 var genome := ""
 
 var letters_possible = ['A', 'T', 'G']
@@ -93,11 +93,6 @@ func _ready():
 			letters_possible[i%sc]
 		trait_to_gene.append(combo)
 		gene_to_trait[combo] = i
-
-func reset_stats(level:int):
-	if level == 1:
-		HP = 100
-		Score = 0
 		
 func clear_children(node):
 	for n in node.get_children():
@@ -106,7 +101,7 @@ func clear_children(node):
 
 # Add a gene to the player genome
 func add_gene(letter):
-	var max_groups = 4
+	var max_groups = 5
 	var max_letters = max_groups * len(letters_possible)
 	genome += letter
 	var start_index = max(0, len(genome) - max_letters)

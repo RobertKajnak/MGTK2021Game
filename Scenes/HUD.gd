@@ -3,6 +3,10 @@ extends CanvasLayer
 func _ready():
 	Global.hud_index = get_index()
 
+func _process(delta):
+	$Energy.value = Global.energy
+	$Hydration.value = Global.hydration
+
 func refresh():
 	var genes = $ContainerDNA.get_children()
 	var genome = ""

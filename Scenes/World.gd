@@ -33,9 +33,17 @@ func _ready():
 	# Spawn random RNA Fragments
 	for i in range(6 + randi()%4):
 		var rna_obj = load("res://Scenes/RNA_Object.tscn").instance()
-		# Check here for overlaps with objects
+		# Check here for overlaps with objects (álmodj királylány)
 		rna_obj.position = Vector2(100+randi()%1150,50+randi()%660)
 		$RNA_nodes.add_child(rna_obj)
+	
+	# Spawn green food
+	for i in range(6 + randi()%4):
+		var plant = load("res://Scenes/Food_object.tscn").instance()
+		plant.position = Vector2(100+randi()%1150,50+randi()%660)
+		$Plant_nodes.add_child(plant)
+		
+	update_fog($Player.position)
 	
 func update_vision_radius(new_radius):
 	lightImage.resize(lightImage.get_size()*new_radius)
