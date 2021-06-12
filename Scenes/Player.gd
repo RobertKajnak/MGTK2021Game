@@ -31,4 +31,4 @@ func get_input():
 	else:
 		velocity.y = lerp(velocity.y, 0, friction)
 		
-	
+

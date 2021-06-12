@@ -1,11 +1,13 @@
 extends Node
 
-var hud_index = 0 # Used to update the HUD during collisions
+var hud_index := 0 # Used to update the HUD during collisions
 
-var current_level = 1
-var HP = 100
-var Score = 0;
-var genome = ""
+var current_level := 1
+
+# Player stuff
+var HP := 100
+var Score := 0
+var genome := ""
 
 var letters_possible = ['A', 'T', 'G']
 var letter_to_color = { 'A': Color.red, 'T': Color.green, 'G': Color.yellow }
@@ -62,3 +64,10 @@ func clear_children(node):
 	for n in node.get_children():
 		node.remove_child(n)
 		n.queue_free()
+
+# Add a gene to the player genome
+func add_gene(letter):
+	var max_letters = 4 * len(letters_possible)
+	genome += letter
+	var start_index = max(0, len(genome) - max_letters)
+	genome = genome.substr(start_index, len(genome))

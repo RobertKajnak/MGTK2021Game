@@ -1,10 +1,5 @@
 extends Control
 
-func _ready():
-	# TODO remove this before launch
-	get_tree().change_scene("res://Scenes/Level2.tscn") 
-	pass
-
 func _on_ButtonStart_pressed():
 	get_tree().change_scene("res://Scenes/Level2.tscn")
 

@@ -2,13 +2,16 @@ extends Area2D
 
 var letter
 
+var hub
+
 func _ready():
+	hub = get_hub()
 	letter = Global.letters_possible[randi() % len(Global.letters_possible)]
 	$Sprite.set_modulate(Global.letter_to_color[letter])
 
 func _on_RNA_body_entered(body):
-	Global.genome += letter
-	get_hub().refresh()
+	Global.add_gene(letter)
+	hub.refresh()
 	queue_free()
 
 func get_hub():
