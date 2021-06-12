@@ -3,9 +3,6 @@ extends VBoxContainer
 
 var letters setget set_letters, get_letters
 
-func _ready():
-	pass
-
 func set_letters(letters:String):
 	for i in range(len(letters)):
 		$LetterContainer.find_node('Letter'+str(i+1)).set_text(letters[i])
@@ -16,9 +13,11 @@ func set_letters(letters:String):
 		
 	if len(letters) == 3:
 		var index = Global.gene_to_index[letters]
-		$DNAProperty.set_text(Global.index_to_property[index])
-		$DNAIcon.set_modulate(Global.index_to_color[index])
-		$DNAProperty.set_modulate(Global.index_to_color[index])
+		var trait = Global.index_to_trait[index]
+		var color = Global.index_to_color[index]
+		$DNAProperty.set_text(Global.trait_to_text(trait))
+		$DNAIcon.set_modulate(color)
+		$DNAProperty.set_modulate(color)
 		
 		$DNAProperty.visible = true
 		$DNAIcon.visible = true

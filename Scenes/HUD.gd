@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 func _ready():
-	Global.hud_index = self.get_index()
+	Global.hud_index = get_index()
 
 func refresh():
 	var genes = $ContainerDNA.get_children()
