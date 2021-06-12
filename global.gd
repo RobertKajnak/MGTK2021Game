@@ -90,6 +90,7 @@ func _ready():
 		index_to_color.append(index_to_trait_and_color[i][1])
 		index_to_trait.append(index_to_trait_and_color[i][0])
 
+
 func reset_stats(level:int):
 	if level == 1:
 		HP = 100
