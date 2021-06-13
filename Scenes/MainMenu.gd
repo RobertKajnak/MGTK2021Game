@@ -20,7 +20,7 @@ func _unhandled_input(event):
 		if event.pressed:
 			if event.scancode == KEY_ESCAPE:
 				exit_game()
-				
+
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		exit_game()
@@ -28,3 +28,10 @@ func _notification(what):
 		exit_game()
 	elif what == MainLoop.NOTIFICATION_WM_FOCUS_IN or what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
 		pass
+
+
+func _on_ButtonOptions_pressed():
+	$Tut_1.visible = true
+	$CenterContainer/VBoxContainer/ButtonExit.disabled = true
+	$CenterContainer/VBoxContainer/ButtonOptions.disabled = true
+	$CenterContainer/VBoxContainer/ButtonStart.disabled = true
