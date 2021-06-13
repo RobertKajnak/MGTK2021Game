@@ -1,9 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://res/main_menu_bg.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://res/tutorial/Cellscape tutorial(6).png" type="Texture" id=3]
 [ext_resource path="res://res/buttons/button_exit.png" type="Texture" id=4]
 [ext_resource path="res://res/buttons/button_start.png" type="Texture" id=5]
+[ext_resource path="res://res/tutorial/Cellscape tutorial(7).png" type="Texture" id=6]
+[ext_resource path="res://res/tutorial/Cellscape tutorial(3).png" type="Texture" id=7]
+[ext_resource path="res://res/tutorial/Cellscape tutorial.png" type="Texture" id=8]
+[ext_resource path="res://res/tutorial/Cellscape tutorial(1).png" type="Texture" id=9]
+[ext_resource path="res://res/tutorial/Cellscape tutorial(5).png" type="Texture" id=10]
+[ext_resource path="res://res/buttons/button_how_2_play.png" type="Texture" id=11]
+[ext_resource path="res://res/tutorial/Cellscape tutorial(2).png" type="Texture" id=12]
+[ext_resource path="res://res/tutorial/Cellscape tutorial(4).png" type="Texture" id=13]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -28,9 +37,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 540.0
-margin_top = 240.0
+margin_top = 163.0
 margin_right = 740.0
-margin_bottom = 475.0
+margin_bottom = 553.0
 custom_constants/separation = 75
 
 [node name="ButtonStart" type="TextureButton" parent="CenterContainer/VBoxContainer"]
@@ -38,11 +47,66 @@ margin_right = 200.0
 margin_bottom = 80.0
 texture_normal = ExtResource( 5 )
 
-[node name="ButtonExit" type="TextureButton" parent="CenterContainer/VBoxContainer"]
+[node name="ButtonTutorial" type="TextureButton" parent="CenterContainer/VBoxContainer"]
 margin_top = 155.0
 margin_right = 200.0
 margin_bottom = 235.0
+texture_normal = ExtResource( 11 )
+
+[node name="ButtonExit" type="TextureButton" parent="CenterContainer/VBoxContainer"]
+margin_top = 310.0
+margin_right = 200.0
+margin_bottom = 390.0
 texture_normal = ExtResource( 4 )
 
+[node name="Tut1" type="Sprite" parent="."]
+visible = false
+position = Vector2( 645.739, 361.519 )
+scale = Vector2( 1.33446, 1.33474 )
+texture = ExtResource( 8 )
+
+[node name="Tut2" type="Sprite" parent="."]
+visible = false
+position = Vector2( 645.739, 361.519 )
+scale = Vector2( 1.33446, 1.33474 )
+texture = ExtResource( 9 )
+
+[node name="Tut3" type="Sprite" parent="."]
+visible = false
+position = Vector2( 645.739, 361.519 )
+scale = Vector2( 1.33446, 1.33474 )
+texture = ExtResource( 12 )
+
+[node name="Tut4" type="Sprite" parent="."]
+visible = false
+position = Vector2( 645.739, 361.519 )
+scale = Vector2( 1.33446, 1.33474 )
+texture = ExtResource( 7 )
+
+[node name="Tut5" type="Sprite" parent="."]
+visible = false
+position = Vector2( 645.739, 361.519 )
+scale = Vector2( 1.33446, 1.33474 )
+texture = ExtResource( 13 )
+
+[node name="Tut6" type="Sprite" parent="."]
+visible = false
+position = Vector2( 645.739, 361.519 )
+scale = Vector2( 1.33446, 1.33474 )
+texture = ExtResource( 10 )
+
+[node name="Tut7" type="Sprite" parent="."]
+visible = false
+position = Vector2( 645.739, 361.519 )
+scale = Vector2( 1.33446, 1.33474 )
+texture = ExtResource( 3 )
+
+[node name="Tut8" type="Sprite" parent="."]
+visible = false
+position = Vector2( 645.739, 361.519 )
+scale = Vector2( 1.33446, 1.33474 )
+texture = ExtResource( 6 )
+
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonStart" to="." method="_on_ButtonStart_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonTutorial" to="." method="_on_ButtonTutorial_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonExit" to="." method="_on_ButtonExit_pressed"]

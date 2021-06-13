@@ -1,9 +1,42 @@
 extends Control
 
+var counter = 1
 
 func _ready():
 	#var _err = get_tree().change_scene("res://Scenes/Level2.tscn")
 	pass
+	
+func _process(delta):
+	if Input.is_action_just_pressed("ui_right"):
+		match counter:
+			1:
+				$Tut2.visible = true
+				$Tut1.visible = false
+			2:
+				$Tut3.visible = true
+				$Tut2.visible = false
+			3:
+				$Tut4.visible = true
+				$Tut3.visible = false
+			4:
+				$Tut5.visible = true
+				$Tut4.visible = false
+			5:
+				$Tut6.visible = true
+				$Tut5.visible = false
+			6:
+				$Tut7.visible = true
+				$Tut6.visible = false
+			7:
+				$Tut8.visible = true
+				$Tut7.visible = false
+			8:
+				$Tut8.visible = false
+				$CenterContainer/VBoxContainer/ButtonExit.disabled = false
+				$CenterContainer/VBoxContainer/ButtonTutorial.disabled = false
+				$CenterContainer/VBoxContainer/ButtonStart.disabled = false
+				counter = 0
+		counter += 1
 
 func _on_ButtonStart_pressed():
 	var _err = get_tree().change_scene("res://Scenes/Level2.tscn")
@@ -30,8 +63,8 @@ func _notification(what):
 		pass
 
 
-func _on_ButtonOptions_pressed():
-	$Tut_1.visible = true
+func _on_ButtonTutorial_pressed():
+	$Tut1.visible = true
 	$CenterContainer/VBoxContainer/ButtonExit.disabled = true
-	$CenterContainer/VBoxContainer/ButtonOptions.disabled = true
+	$CenterContainer/VBoxContainer/ButtonTutorial.disabled = true
 	$CenterContainer/VBoxContainer/ButtonStart.disabled = true
