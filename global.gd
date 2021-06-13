@@ -33,7 +33,7 @@ func trait_to_text(trait: int):
 		Trait.Sight: return "Sight" 
 		Trait.Long_Vision: return "Long Vision" 
 		Trait.Sense_Cells: return "Sense Cells" 
-		Trait.Poo_Eating: return "Poo Eating" 
+		Trait.Poo_Eating: return "Meat eating" 
 		Trait.Virus: return "Virus" 
 		Trait.Water_Storage: return "Water Storage" 
 		Trait.Better_Core: return "Better Core" 
@@ -109,6 +109,18 @@ func add_gene(letter: String) -> void:
 	var start_index = max(0, len(genome) - max_letters)
 	genome = genome.substr(start_index, len(genome))
 	hud_object.refresh()
+	
+# Add a trait
+func add_random_trait() -> void:
+	var max_groups = 5
+	var max_letters = max_groups * len(letters_possible)
+	if len(genome) > max_letters - 3:
+		var start_index = max(0, len(genome) - max_letters + 3)		
+		genome = genome.substr(start_index, len(genome))
+	var trait = randi() % Trait.size()
+	genome += trait_to_gene[trait]
+	hud_object.refresh()
+	print(genome)
 
 # Returns a list of active traits the player has
 func get_traits() -> Array:

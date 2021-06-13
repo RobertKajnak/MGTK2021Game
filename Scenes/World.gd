@@ -87,6 +87,11 @@ func generate_flora(offsetx, offsety):
 		var rock = load("res://res/models/Rock.tscn").instance()
 		rock.position = Vector2(offsetx + randi()%1000,offsety + randi()%1000)
 		$Rocks.add_child(rock)
+		
+	for _i in range(1 + randi()%5):
+		var cell = load("res://Scenes/Food_object_cell.tscn").instance()
+		cell.position = Vector2(offsetx + randi()%1000,offsety + randi()%1000)
+		$Rocks.add_child(cell)
 	
 func generate_grids():
 	var current_grid = Vector2(int($Player.position.x / 1000), int($Player.position.y / 1000)) * 1000;
