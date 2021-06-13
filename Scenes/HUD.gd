@@ -1,41 +1,35 @@
 extends CanvasLayer
 
 func _ready():
-	pass
+	Global.hud_object = self
 
-func _process(_delta):
+func _process(_delta) -> void:
 	$Energy.value = Global.energy
 	$Hydration.value = Global.hydration
 
-func refresh():
-	var genes = $ContainerDNA.get_children()
+func refresh() -> void:
 	var genome = ""
-	for gene in genes:
+	for gene in $ContainerDNA.get_children():
 		genome += gene.get_letters()
 		
 	if genome != Global.genome:
 		Global.clear_children($ContainerDNA)
-		var accumulator = ""
-		for dna_letter in Global.genome:
-			if len(accumulator) < 3:
-				accumulator += dna_letter
-			else:
-				generate_dna_segment(accumulator)
-				accumulator = dna_letter
-		if len(accumulator) > 0:
-			generate_dna_segment(accumulator)
+		var genes = Global.sliding_window_of(3, Global.genome)
+		for gene_index in range(len(genes)):
+			var gene = genes[gene_index]
+			generate_dna_segment(Global.array_to_string(gene), gene_index)
 		
-func generate_dna_segment(segment):
+func generate_dna_segment(gene: String, gene_index: int) -> void:
 	var dna_segment = load("res://Scenes/DNA_Segment.tscn").instance()
 	$ContainerDNA.add_child(dna_segment)
-	dna_segment.set_letters(segment)
+	dna_segment.set_segment(gene, gene_index)
 	
-	if len(segment)==len(Global.letters_possible) and not Global.discovered_traits.has(segment):
-		Global.discovered_traits.append(segment)
-		$ScrollContainer/KnownTraitContainer.add_trait(segment)
+	if len(gene) == len(Global.letters_possible) and not Global.discovered_traits.has(gene):
+		Global.discovered_traits.append(gene)
+		$ScrollContainer/KnownTraitContainer.add_trait(gene)
 		
 
-func die():
+func die() -> void:
 	$Energy.set_modulate(Color.darkgray)
 	$Hydration.set_modulate(Color.darkgray)
 	$ContainerDNA.set_modulate(Color.darkgray)

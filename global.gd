@@ -1,6 +1,6 @@
 extends Node
 
-var hud_index := 0 # Used to update the HUD during collisions
+var hud_object = null
 
 var current_level := 1
 
@@ -102,15 +102,16 @@ func clear_children(node):
 		n.queue_free()
 
 # Add a gene to the player genome
-func add_gene(letter):
+func add_gene(letter: String) -> void:
 	var max_groups = 5
 	var max_letters = max_groups * len(letters_possible)
 	genome += letter
 	var start_index = max(0, len(genome) - max_letters)
 	genome = genome.substr(start_index, len(genome))
+	hud_object.refresh()
 
 # Returns a list of active traits the player has
-func get_traits():
+func get_traits() -> Array:
 	var traits = []
 	for letters in sliding_window_of(3, genome):
 		var gene = array_to_string(letters)
@@ -118,7 +119,11 @@ func get_traits():
 			traits.append(gene_to_trait[gene])
 	return traits
 
-
+# Removes a number of letters from genome
+func pop_letters(n: int) -> void:
+	genome = genome.substr(n, len(genome))
+	hud_object.refresh()
+	
 # --- Utility Functions ---
 
 # Example: sliding_window_of(2, "ASDFG") == [[A, S], [D, F], [G]]

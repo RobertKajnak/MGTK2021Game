@@ -1,8 +1,10 @@
 extends VBoxContainer
 
+var gene_index := -1
 
-
-func set_letters(letters:String):
+func set_segment(letters: String, gene_index: int) -> void:
+	self.gene_index = gene_index
+	
 	for i in range(len(letters)):
 		$LetterContainer.find_node('Letter'+str(i+1)).set_text(letters[i])
 		$LetterContainer.find_node('Letter'+str(i+1)).visible = true
@@ -23,6 +25,20 @@ func set_letters(letters:String):
 		$DNAProperty.visible = false
 		$DNAIcon.visible = false
 		
-func get_letters():
-	return $LetterContainer/Letter1.text + $LetterContainer/Letter2.text +\
+func get_letters() -> String:
+	return \
+		$LetterContainer/Letter1.text + \
+		$LetterContainer/Letter2.text + \
 		$LetterContainer/Letter3.text
+		
+func _on_Letter1_gui_input(event) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		Global.pop_letters(gene_index * 3 + 1)
+
+func _on_Letter2_gui_input(event) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		Global.pop_letters(gene_index * 3 + 2)
+
+func _on_Letter3_gui_input(event):
+	if event is InputEventMouseButton and event.pressed:
+		Global.pop_letters(gene_index * 3 + 3)

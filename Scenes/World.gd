@@ -67,7 +67,6 @@ func generate_flora(offsetx, offsety):
 	# Spawn random RNA Fragments
 	for _i in range(6 + randi()%10):
 		var rna_obj = load("res://Scenes/RNA_Object.tscn").instance()
-		rna_obj.set_collision_callback(self, "update_genome")
 		# Check here for overlaps with objects (álmodj királylány)
 		rna_obj.position = Vector2(offsetx + randi()%1000, offsety + randi()%1000)
 		$RNA_nodes.add_child(rna_obj)

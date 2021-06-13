@@ -21,7 +21,7 @@ func _physics_process(_delta):
 	else:
 		$PlayerCollision.set_scale(Vector2(1,1))
 		# Ezt igy kell csinalni, de vigyazat, sprite texture csere eseten elromlik (from Andor with love)
-		$PlayerTexture.set_scale(Vector2(0.588,0.645))
+		$PlayerTexture.set_scale(Vector2(0.588,0.645)) 
 	get_input(traits) # Gyuri: nem szuper h minden updatenel meghivjuk
 	velocity = move_and_slide(velocity)
 	

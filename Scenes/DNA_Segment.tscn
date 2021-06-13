@@ -8,6 +8,8 @@
 [node name="DNASegment" type="VBoxContainer"]
 margin_right = 144.0
 margin_bottom = 97.0
+mouse_filter = 2
+mouse_default_cursor_shape = 2
 custom_constants/separation = -8
 script = ExtResource( 4 )
 __meta__ = {
@@ -18,6 +20,7 @@ __meta__ = {
 margin_right = 144.0
 margin_bottom = 45.0
 rect_min_size = Vector2( 144, 0 )
+mouse_filter = 2
 custom_constants/separation = 14
 alignment = 1
 
@@ -25,6 +28,8 @@ alignment = 1
 margin_left = 22.0
 margin_right = 46.0
 margin_bottom = 45.0
+mouse_filter = 1
+mouse_default_cursor_shape = 14
 custom_fonts/font = ExtResource( 3 )
 text = "A"
 
@@ -32,6 +37,8 @@ text = "A"
 margin_left = 60.0
 margin_right = 84.0
 margin_bottom = 45.0
+mouse_filter = 1
+mouse_default_cursor_shape = 14
 custom_fonts/font = ExtResource( 3 )
 text = "A"
 
@@ -39,6 +46,8 @@ text = "A"
 margin_left = 98.0
 margin_right = 122.0
 margin_bottom = 45.0
+mouse_filter = 1
+mouse_default_cursor_shape = 14
 custom_fonts/font = ExtResource( 3 )
 text = "A"
 
@@ -55,3 +64,7 @@ margin_bottom = 111.0
 custom_fonts/font = ExtResource( 1 )
 text = "<Property>"
 align = 1
+
+[connection signal="gui_input" from="LetterContainer/Letter1" to="." method="_on_Letter1_gui_input"]
+[connection signal="gui_input" from="LetterContainer/Letter2" to="." method="_on_Letter2_gui_input"]
+[connection signal="gui_input" from="LetterContainer/Letter3" to="." method="_on_Letter3_gui_input"]
