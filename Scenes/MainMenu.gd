@@ -2,7 +2,8 @@ extends Control
 
 
 func _ready():
-	var _err = get_tree().change_scene("res://Scenes/Level2.tscn")
+	#var _err = get_tree().change_scene("res://Scenes/Level2.tscn")
+	pass
 
 func _on_ButtonStart_pressed():
 	var _err = get_tree().change_scene("res://Scenes/Level2.tscn")

@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 
 Global="*res://global.gd"
 Data="*res://data.gd"
+BGM="*res://Scenes/BGM.tscn"
 
 [display]
 
