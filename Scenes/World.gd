@@ -52,7 +52,7 @@ func _ready():
 	
 	Global.genome = \
 		Global.trait_to_gene[Global.Trait.Movement] + \
-		Global.trait_to_gene[Global.Trait.Absorption] + \
+		Global.trait_to_gene[Global.Trait.Sense_Cells] + \
 		Global.trait_to_gene[Global.Trait.Sight]
 	update_genome()
 	
@@ -147,6 +147,11 @@ func _physics_process(delta):
 	
 	var has_sight = traits.has(Global.Trait.Sight)
 	update_vision_radius(NORMAL_SIGHT_MULTIPLIER if has_sight else SHORT_SIGHT_MULTIPLIER)
+	var sense_cells = traits.has(Global.Trait.Sense_Cells)
+	if sense_cells:
+		$Cell_nodes.z_index = 10
+	else:
+		$Cell_nodes.z_index = 0
 	
 	# Only updates the flag, if the player has moved
 	if $Player.position != player_position:
