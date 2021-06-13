@@ -119,6 +119,9 @@ func _physics_process(delta):
 		
 		if sun_dist<1050:
 			Global.hydration -= delta*sun_heavy_dry * $Sun.energy
+			#var dir = $Player.position.direction_to($Sun.position)
+			#var dir = $Sun/RayCast2D.cast_to($Player.position)
+			#print(dir)
 		elif sun_dist<1550:
 			Global.hydration -= delta*sun_light_dry * $Sun.energy
 			
