@@ -40,8 +40,6 @@ var current_time = 0
 onready var player_position = $Player.position 
 
 func _ready():
-	if OS.get_name() == "HTML5":
-		fog.visible = false
 	randomize()
 	
 	player_start_position = $Player.position
@@ -121,7 +119,7 @@ func update_fog(lightOffsetModifier):
 	var traits = Global.get_traits()
 	var has_long_sight = traits.has(Global.Trait.Long_Vision)
 	fog.visible = not has_long_sight
-	if has_long_sight:
+	if has_long_sight or OS.get_name() != "Windows":
 		return
 	fogImage.lock()
 	lightImage.lock()
