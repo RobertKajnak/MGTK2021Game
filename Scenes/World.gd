@@ -139,25 +139,22 @@ func _physics_process(delta):
 			update_fog($Player.position - ($Player/Camera2D.get_camera_position() - player_start_position))
 		camera_position = $Player/Camera2D.get_camera_position()
 		player_position = $Player.position
-		
-#	check_raycast()
 	
 	#Sun event
 	if sun_event_in_progress:
 		$Sun.position = sun_start_pos + (sun_end_pos - sun_start_pos) * \
 						((current_time - sun_event_start_time) / sun_duration) + ($Player/Camera2D.get_camera_position() - player_start_position)
+		var in_shadow = not check_raycast()
 		var sun_dist = $Sun.position.distance_to($Player.position)
 		
-		if sun_dist<1050:
-			Global.hydration -= delta*sun_heavy_dry * $Sun.energy
-			#var dir = $Player.position.direction_to($Sun.position)
-			#var dir = $Sun/RayCast2D.cast_to($Player.position)
-			#print(dir)
-		elif sun_dist<1550:
-			Global.hydration -= delta*sun_light_dry * $Sun.energy
-			
-		if current_time - sun_event_start_time >= sun_duration:
-			sun_event_in_progress = false
+		if not in_shadow:
+			if sun_dist<1050:
+				Global.hydration -= delta*sun_heavy_dry * $Sun.energy
+			elif sun_dist<1550:
+				Global.hydration -= delta*sun_light_dry * $Sun.energy
+				
+			if current_time - sun_event_start_time >= sun_duration:
+				sun_event_in_progress = false
 		
 	if Global.hydration <= 0 or Global.energy <= 0:
 		$Player.die()
@@ -170,8 +167,14 @@ func _physics_process(delta):
 		energy_decay_modifier = 40
 	Global.energy -= delta * energy_decay_modifier
 
-#func check_raycast():
-#	$Sun/Shadow.
+func check_raycast():
+	var space_state = get_world_2d().get_direct_space_state()
+	# use global coordinates, not local to node
+	var result = space_state.intersect_ray( $Sun.position, $Player.position )
+	if result['collider_id'] == 1295:
+		return true
+	else:
+		return false
 
 func die():
 	pause()

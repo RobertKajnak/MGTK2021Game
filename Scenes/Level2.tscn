@@ -75,8 +75,9 @@ shadow_gradient_length = 1.2
 shadow_filter = 4
 shadow_filter_smooth = 2.0
 
-[node name="Shadow" type="RayCast2D" parent="Sun"]
+[node name="Sunray" type="RayCast2D" parent="Sun"]
 enabled = true
+cast_to = Vector2( 0, 0 )
 
 [node name="SunTimer" type="Timer" parent="."]
 wait_time = 30.0
