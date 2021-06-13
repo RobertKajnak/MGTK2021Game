@@ -17,7 +17,7 @@ enum Trait {
 	Sight, Long_Vision, Sense_Cells, Poo_Eating, Virus, Water_Storage, 
 	Better_Core, Double_Core, Combustion, Nothing1, Nothing2, Nothing3, 
 	Nothing4, Inverse_Movement, Unstable_DNA, Giant, Color_Change, Chameleon, 
-	Halucination, Photosensibility, Jump
+	Halucination, Photosensivity, Jump
 	}
 
 func trait_to_text(trait: int):
@@ -47,7 +47,7 @@ func trait_to_text(trait: int):
 		Trait.Color_Change: return "Color Change" 
 		Trait.Chameleon: return "Chameleon" 
 		Trait.Halucination: return "Halucination" 
-		Trait.Photosensibility: return "Photosensibility" 
+		Trait.Photosensivity: return "Photosensibility" 
 		Trait.Jump: return "Jump"
 
 func trait_to_color(trait: int): 
@@ -77,7 +77,7 @@ func trait_to_color(trait: int):
 		Trait.Color_Change: return Color.gray
 		Trait.Chameleon: return Color.gray
 		Trait.Halucination: return Color.blue
-		Trait.Photosensibility: return Color.red
+		Trait.Photosensivity: return Color.red
 		Trait.Jump: return Color.orange
 		
 var trait_to_gene = []
@@ -115,6 +115,7 @@ func get_traits():
 		if len(gene) == 3:
 			traits.append(gene_to_trait[gene])
 	return traits
+
 
 # --- Utility Functions ---
 

@@ -6,7 +6,12 @@ const JUMP_DISTANCE = 800
 export (float) var acceleration = 0.5
 export (float) var friction = 0.1
 
+var is_dead := false
+
 func _physics_process(_delta):
+	if is_dead:
+		return 
+		
 	var traits = Global.get_traits()
 	$PlayerTexture.visible = not traits.has(Global.Trait.Chameleon)
 	var is_giant = traits.has(Global.Trait.Giant)
@@ -20,6 +25,8 @@ func _physics_process(_delta):
 	get_input(traits) # Gyuri: nem szuper h minden updatenel meghivjuk
 	velocity = move_and_slide(velocity)
 	
+func die():
+	is_dead = true
 
 func get_input(traits):
 	regular_move(traits)

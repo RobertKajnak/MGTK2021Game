@@ -2,19 +2,20 @@ extends Area2D
 
 var letter
 
-var hub
+var coll_obj
+var coll_func
 
 func _ready():
-	hub = get_hub()
 	letter = Global.letters_possible[randi() % len(Global.letters_possible)]
 	$Sprite.set_modulate(Global.letter_to_color[letter])
 
+func set_collision_callback(object, function):
+	self.coll_obj = object
+	self.coll_func = function
+
 func _on_RNA_body_entered(body):
 	Global.add_gene(letter)
-	hub.refresh()
+	coll_obj.call(coll_func)
 	queue_free()
 
-func get_hub():
-	# Gyuri: nem a legjobb, mert ha megvaltozik az objektumok hierarhiaja 
-	# akkor ez nem mukszik tobbet!
-	return get_parent().get_parent().get_child(Global.hud_index)
+

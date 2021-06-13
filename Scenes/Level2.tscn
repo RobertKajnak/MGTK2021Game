@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://res/textures/Light.png" type="Texture" id=2]
+[ext_resource path="res://res/fonts/FontLVeryLargeText.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Scenes/World.gd" type="Script" id=4]
 [ext_resource path="res://res/textures/background.png" type="Texture" id=5]
 [ext_resource path="res://res/Water2D/water_diffuse.png" type="Texture" id=6]
@@ -45,13 +46,27 @@ centered = false
 [node name="HUD" parent="." instance=ExtResource( 10 )]
 
 [node name="Sun" type="Light2D" parent="."]
-position = Vector2( -1525.63, -1358.18 )
+position = Vector2( -1444.73, -1010.57 )
 scale = Vector2( 1.51914, 1.36375 )
 texture = ExtResource( 2 )
 texture_scale = 8.28
+shadow_enabled = true
 
 [node name="SunTimer" type="Timer" parent="."]
 wait_time = 30.0
 autostart = true
+
+[node name="LabelDied" type="Label" parent="."]
+visible = false
+margin_left = 452.489
+margin_top = 302.658
+margin_right = 796.489
+margin_bottom = 406.658
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.858824, 0.00392157, 0.00392157, 1 )
+text = "You Died"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="timeout" from="SunTimer" to="." method="_on_SunTimer_timeout"]

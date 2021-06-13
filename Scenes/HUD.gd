@@ -29,3 +29,8 @@ func generate_dna_segment(segment):
 	var dna_segment = load("res://Scenes/DNA_Segment.tscn").instance()
 	$ContainerDNA.add_child(dna_segment)
 	dna_segment.set_letters(segment)
+
+func die():
+	$Energy.set_modulate(Color.darkgray)
+	$Hydration.set_modulate(Color.darkgray)
+	$ContainerDNA.set_modulate(Color.darkgray)
