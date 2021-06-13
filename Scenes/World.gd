@@ -137,10 +137,10 @@ func update_fog_image_texture():
 	fog.position = camera.get_camera_screen_center() - player_start_position - Vector2(10,10)
 
 func _physics_process(delta):
-	var traits = Global.get_traits()
-	generate_grids()
 	if paused:
 		return
+	var traits = Global.get_traits()
+	generate_grids()	
 	
 	# Only updates the flag, if the player has moved
 	if $Player.position != player_position:
@@ -183,7 +183,8 @@ func _physics_process(delta):
 		$HUD.die()
 		die()
 		
-	if Global.DNACount == 25:
+	print(Global.DNACount)
+	if Global.DNACount >= 25:
 		win()
 		
 	current_time += delta
@@ -203,9 +204,12 @@ func check_raycast():
 	return false
 
 func die():
+	$HUD.die()
 	pause()
 	
 func win():
+	$Player.die()
+	$HUD.win()
 	pause()
 	
 func pause():

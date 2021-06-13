@@ -52,7 +52,7 @@ margin_top = 64.898
 margin_right = 1167.86
 margin_bottom = 663.898
 rect_scale = Vector2( 0.5, 1 )
-max_value = 20.0
+max_value = 25.0
 texture_over = ExtResource( 1 )
 texture_progress = ExtResource( 2 )
 fill_mode = 3
@@ -88,14 +88,16 @@ __meta__ = {
 
 [node name="LabelVictory" type="Label" parent="."]
 visible = false
-margin_left = 452.489
-margin_top = 302.658
-margin_right = 796.489
-margin_bottom = 406.658
+margin_left = -25.5153
+margin_top = 185.278
+margin_right = 1281.48
+margin_bottom = 503.278
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.207843, 0.572549, 0.133333, 1 )
-text = "You have achieved multiplication!
+text = "You have achieved
+ multiplication!
 You win!"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
