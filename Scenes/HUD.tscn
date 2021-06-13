@@ -167,3 +167,17 @@ margin_left = 18.0
 margin_top = 145.0
 margin_right = 236.0
 margin_bottom = 194.0
+
+[node name="TryAgainButton" type="Button" parent="."]
+visible = false
+margin_left = 522.906
+margin_top = 417.192
+margin_right = 728.906
+margin_bottom = 509.192
+custom_fonts/font = ExtResource( 7 )
+text = "Try Again"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="TryAgainButton" to="." method="_on_Button_pressed"]

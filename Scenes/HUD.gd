@@ -44,3 +44,19 @@ func die() -> void:
 	$DNAPool.set_modulate(Color.darkgray)
 	$ContainerDNA.set_modulate(Color.darkgray)
 	$LabelDied.visible = true
+	$TryAgainButton.visible = true
+
+
+func _on_Button_pressed():
+	$LabelDied.visible = false
+	$TryAgainButton.visible = false
+	Global.energy = 5000
+	Global.hydration = 5000
+	Global.genome = ""
+	Global.DNACount = 0
+	Global.genome = \
+		Global.trait_to_gene[Global.Trait.Movement] + \
+		Global.trait_to_gene[Global.Trait.Absorption] + \
+		Global.trait_to_gene[Global.Trait.Sight]
+
+	var _err = get_tree().change_scene("res://Scenes/MainMenu.tscn")

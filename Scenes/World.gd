@@ -50,7 +50,7 @@ func _ready():
 	
 	Global.genome = \
 		Global.trait_to_gene[Global.Trait.Movement] + \
-		Global.trait_to_gene[Global.Trait.Photosynthesis] + \
+		Global.trait_to_gene[Global.Trait.Absorption] + \
 		Global.trait_to_gene[Global.Trait.Sight]
 	update_genome()
 	
@@ -112,7 +112,6 @@ func update_genome():
 		$Sun.energy = 1
 	
 func update_vision_radius(new_radius):
-	print(new_radius)
 	lightImage.resize(lightImageWidth*new_radius, lightImageHeight*new_radius)
 	light_offset = Vector2(LightTexture.get_width()/2*new_radius, LightTexture.get_height()/2*new_radius)
 
@@ -142,7 +141,7 @@ func _physics_process(delta):
 	if paused:
 		return
 	var traits = Global.get_traits()
-	generate_grids()	
+	generate_grids()
 	
 	var has_sight = traits.has(Global.Trait.Sight)
 	update_vision_radius(NORMAL_SIGHT_MULTIPLIER if has_sight else SHORT_SIGHT_MULTIPLIER)
