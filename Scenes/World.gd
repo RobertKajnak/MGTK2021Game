@@ -40,6 +40,8 @@ var current_time = 0
 onready var player_position = $Player.position 
 
 func _ready():
+	if OS.get_name() == "HTML5":
+		fog.visible = false
 	randomize()
 	
 	player_start_position = $Player.position
