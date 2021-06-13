@@ -51,7 +51,7 @@ func get_input(traits):
 	jump_move(traits)
 	
 func jump_move(traits):
-	var can_jump = true#traits.has(Global.Trait.Jump)
+	var can_jump = traits.has(Global.Trait.Jump)
 	var inverse_movement = traits.has(Global.Trait.Inverse_Movement)
 	
 	var unit = JUMP_DISTANCE if not inverse_movement else -JUMP_DISTANCE
