@@ -171,8 +171,7 @@ func _physics_process(delta):
 					 hydration_modifier/=3	
 										
 				if traits.has(Global.Trait.Photosynthesis):
-					Global.energy += delta*sun_heavy_dry * $Sun.energy * 2
-			print(hydration_modifier)
+					Global.energy += delta*sun_heavy_dry * $Sun.energy * 2			
 			Global.hydration -= hydration_modifier
 			if current_time - sun_event_start_time >= sun_duration:
 				sun_event_in_progress = false
@@ -191,11 +190,12 @@ func _physics_process(delta):
 func check_raycast():
 	var space_state = get_world_2d().get_direct_space_state()
 	# use global coordinates, not local to node
-	var result = space_state.intersect_ray( $Sun.position, $Player.position )
-	if result['collider_id'] == 1295:
-		return true
-	else:
-		return false
+	var result = space_state.intersect_ray( $Sun.position, $Player.position ).values()
+	for item in result:
+		if typeof(item) == 17:
+			if item.get_class() == 'KinematicBody2D':
+				return true
+	return false
 
 func die():
 	pause()
