@@ -12,6 +12,8 @@ var genome := ""
 var letters_possible = ['A', 'T', 'G']
 var letter_to_color = { 'A': Color.red, 'T': Color.green, 'G': Color.yellow }
 
+var discovered_traits = []
+
 enum Trait { 
 	Movement, Speed, Absorption, Photosynthesis, Digestion, Water_Survival, 
 	Sight, Long_Vision, Sense_Cells, Poo_Eating, Virus, Water_Storage, 

@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 func _ready():
-	Global.hud_index = get_index()
+	pass
 
 func _process(_delta):
 	$Energy.value = Global.energy
@@ -29,6 +29,11 @@ func generate_dna_segment(segment):
 	var dna_segment = load("res://Scenes/DNA_Segment.tscn").instance()
 	$ContainerDNA.add_child(dna_segment)
 	dna_segment.set_letters(segment)
+	
+	if len(segment)==len(Global.letters_possible) and not Global.discovered_traits.has(segment):
+		Global.discovered_traits.append(segment)
+		$ScrollContainer/KnownTraitContainer.add_trait(segment)
+		
 
 func die():
 	$Energy.set_modulate(Color.darkgray)
