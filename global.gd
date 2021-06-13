@@ -120,7 +120,6 @@ func add_random_trait() -> void:
 	var trait = randi() % Trait.size()
 	genome += trait_to_gene[trait]
 	hud_object.refresh()
-	print(genome)
 
 # Returns a list of active traits the player has
 func get_traits() -> Array:

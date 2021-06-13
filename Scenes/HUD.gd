@@ -28,6 +28,11 @@ func generate_dna_segment(gene: String, gene_index: int) -> void:
 		Global.discovered_traits.append(gene)
 		$KnownTraitContainer.add_trait(gene)
 		
+func playEffect(effect = 'nom_' + String(randi() % 7 + 1) + ".ogg"):
+	var effectPlayer = AudioStreamPlayer.new()
+	self.add_child(effectPlayer)
+	effectPlayer.stream = load("res://res/sounds/" + effect)
+	effectPlayer.play()
 
 func die() -> void:
 	$Energy.set_modulate(Color.darkgray)

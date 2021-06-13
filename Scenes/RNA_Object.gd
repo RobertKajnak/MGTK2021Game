@@ -8,5 +8,6 @@ func _ready():
 	$Letter_Label.text = letter
 
 func _on_RNA_body_entered(body):
+	Global.hud_object.playEffect("DNA.wav")
 	Global.add_gene(letter)
 	queue_free()
