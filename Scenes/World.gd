@@ -48,7 +48,7 @@ func _ready():
 	
 	Global.genome = \
 		Global.trait_to_gene[Global.Trait.Movement] + \
-		Global.trait_to_gene[Global.Trait.Absorption] + \
+		Global.trait_to_gene[Global.Trait.Combustion] + \
 		Global.trait_to_gene[Global.Trait.Sight]
 	update_genome()
 	
@@ -91,7 +91,7 @@ func generate_flora(offsetx, offsety):
 	for _i in range(1 + randi()%5):
 		var cell = load("res://Scenes/Food_object_cell.tscn").instance()
 		cell.position = Vector2(offsetx + randi()%1000,offsety + randi()%1000)
-		$Rocks.add_child(cell)
+		$Cell_nodes.add_child(cell)
 	
 func generate_grids():
 	var current_grid = Vector2(int($Player.position.x / 1000), int($Player.position.y / 1000)) * 1000;
@@ -175,6 +175,10 @@ func _physics_process(delta):
 			Global.hydration -= hydration_modifier
 			if current_time - sun_event_start_time >= sun_duration:
 				sun_event_in_progress = false
+	
+	# Combustion
+	if traits.has(Global.Trait.Combustion):
+		Global.energy -= delta * 200 * 2
 		
 	if Global.hydration <= 0 or Global.energy <= 0:
 		$Player.die()

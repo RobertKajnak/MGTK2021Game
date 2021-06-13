@@ -18,9 +18,18 @@ onready var anim_pl_pos = position
 func _physics_process(delta):
 	if is_dead:
 		return 
-		
+	
+	var color = Color(0.1,0.1,0.5)
 	var traits = Global.get_traits()
 	$PlayerTexture.visible = not traits.has(Global.Trait.Chameleon)
+	
+	# Color change
+	if traits.has(Global.Trait.Color_Change):
+		$PlayerTexture.set_modulate(color)
+	else:
+		$PlayerTexture.set_modulate(Color.white)
+		
+	# Giant
 	var is_giant = traits.has(Global.Trait.Giant)
 	if is_giant:
 		$PlayerCollision.set_scale(Vector2(2,2))
