@@ -48,7 +48,7 @@ func _ready():
 	
 	Global.genome = \
 		Global.trait_to_gene[Global.Trait.Movement] + \
-		Global.trait_to_gene[Global.Trait.Combustion] + \
+		Global.trait_to_gene[Global.Trait.Photosynthesis] + \
 		Global.trait_to_gene[Global.Trait.Sight]
 	update_genome()
 	
@@ -160,18 +160,16 @@ func _physics_process(delta):
 		if not in_shadow:
 			if sun_dist<1050:
 				hydration_modifier=delta*sun_heavy_dry * $Sun.energy
-				if traits.has(Global.Trait.Water_Storage):						
-					 hydration_modifier/=3		
-									
+				if traits.has(Global.Trait.Water_Storage):
+					 hydration_modifier/=3
 				if traits.has(Global.Trait.Photosynthesis):
-					Global.energy += delta*sun_heavy_dry * $Sun.energy * 2
+					Global.energy = min(5000, Global.energy + delta*sun_heavy_dry * $Sun.energy * 2	)
 			elif sun_dist<1550:
 				hydration_modifier=delta*sun_light_dry * $Sun.energy
-				if traits.has(Global.Trait.Water_Storage):						
-					 hydration_modifier/=3	
-										
+				if traits.has(Global.Trait.Water_Storage):
+					 hydration_modifier/=3
 				if traits.has(Global.Trait.Photosynthesis):
-					Global.energy += delta*sun_heavy_dry * $Sun.energy * 2			
+					Global.energy = min(5000, Global.energy + delta*sun_light_dry * $Sun.energy * 2	)	
 			Global.hydration -= hydration_modifier
 			if current_time - sun_event_start_time >= sun_duration:
 				sun_event_in_progress = false
@@ -184,6 +182,9 @@ func _physics_process(delta):
 		$Player.die()
 		$HUD.die()
 		die()
+		
+	if Global.DNACount == 25:
+		win()
 		
 	current_time += delta
 	var energy_decay_modifier = 100
@@ -202,6 +203,9 @@ func check_raycast():
 	return false
 
 func die():
+	pause()
+	
+func win():
 	pause()
 	
 func pause():
@@ -223,7 +227,7 @@ func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.pressed:
 			if event.scancode == KEY_ESCAPE:
-				exit_game()
+				exit_game() 
 				
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:

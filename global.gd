@@ -8,6 +8,7 @@ var current_level := 1
 var energy := 5000
 var hydration := 5000
 var genome := ""
+var DNACount := 0
 
 var letters_possible = ['A', 'T', 'G']
 var letter_to_color = { 'A': Color.red, 'T': Color.green, 'G': Color.yellow }
@@ -103,6 +104,7 @@ func clear_children(node):
 
 # Add a gene to the player genome
 func add_gene(letter: String) -> void:
+	DNACount += 1
 	var max_groups = 5
 	var max_letters = max_groups * len(letters_possible)
 	genome += letter
@@ -112,6 +114,7 @@ func add_gene(letter: String) -> void:
 	
 # Add a trait
 func add_random_trait() -> void:
+	DNACount += 3
 	var max_groups = 5
 	var max_letters = max_groups * len(letters_possible)
 	if len(genome) > max_letters - 3:

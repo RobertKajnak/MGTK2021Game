@@ -6,6 +6,8 @@ func _ready():
 func _process(_delta) -> void:
 	$Energy.value = Global.energy
 	$Hydration.value = Global.hydration
+	$DNAPool.value = Global.DNACount
+	print()
 
 func refresh() -> void:
 	var genome = ""
@@ -33,9 +35,13 @@ func playEffect(effect = 'nom_' + String(randi() % 7 + 1) + ".ogg"):
 	self.add_child(effectPlayer)
 	effectPlayer.stream = load("res://res/sounds/" + effect)
 	effectPlayer.play()
+	
+func win() -> void:
+	$LabelVictory.visible = true
 
 func die() -> void:
 	$Energy.set_modulate(Color.darkgray)
 	$Hydration.set_modulate(Color.darkgray)
+	$DNAPool.set_modulate(Color.darkgray)
 	$ContainerDNA.set_modulate(Color.darkgray)
 	$LabelDied.visible = true
