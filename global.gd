@@ -6,7 +6,7 @@ var current_level := 1
 
 # Player stuff
 var energy := 50
-var hydration := 50
+var hydration := 5000
 var genome := ""
 
 var letters_possible = ['A', 'T', 'G']
@@ -124,7 +124,7 @@ func sliding_window_of(n: int, array):
 	var temp = []
 	for element in array:
 		temp.append(element)
-		if len(temp) == 3:
+		if len(temp) == n:
 			result.append(temp)
 			temp = []
 	result.append(temp)

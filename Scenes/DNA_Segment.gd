@@ -1,7 +1,6 @@
 extends VBoxContainer
 
 
-var letters setget set_letters, get_letters
 
 func set_letters(letters:String):
 	for i in range(len(letters)):

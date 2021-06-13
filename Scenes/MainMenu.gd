@@ -1,7 +1,11 @@
 extends Control
 
+
+func _ready():
+	var _err = get_tree().change_scene("res://Scenes/Level2.tscn")
+
 func _on_ButtonStart_pressed():
-	get_tree().change_scene("res://Scenes/Level2.tscn")
+	var _err = get_tree().change_scene("res://Scenes/Level2.tscn")
 
 func _on_ButtonExit_pressed():
 	exit_game()

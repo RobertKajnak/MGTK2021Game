@@ -6,7 +6,7 @@ const JUMP_DISTANCE = 800
 export (float) var acceleration = 0.5
 export (float) var friction = 0.1
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var traits = Global.get_traits()
 	$PlayerTexture.visible = not traits.has(Global.Trait.Chameleon)
 	var is_giant = traits.has(Global.Trait.Giant)

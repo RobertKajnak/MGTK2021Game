@@ -8,10 +8,10 @@
 script = ExtResource( 4 )
 
 [node name="Energy" type="TextureProgress" parent="."]
-margin_left = 1022.0
-margin_top = 75.0
-margin_right = 1102.0
-margin_bottom = 674.0
+margin_left = 1194.86
+margin_top = 64.8978
+margin_right = 1274.86
+margin_bottom = 663.898
 rect_scale = Vector2( 0.5, 1 )
 value = 45.0
 texture_over = ExtResource( 1 )
@@ -22,11 +22,12 @@ __meta__ = {
 }
 
 [node name="Hydration" type="TextureProgress" parent="."]
-margin_left = 970.0
-margin_top = 75.0
-margin_right = 1050.0
-margin_bottom = 674.0
+margin_left = 1142.86
+margin_top = 64.8978
+margin_right = 1222.86
+margin_bottom = 663.898
 rect_scale = Vector2( 0.5, 1 )
+max_value = 10000.0
 value = 45.0
 texture_over = ExtResource( 1 )
 texture_progress = ExtResource( 2 )

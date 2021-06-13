@@ -3,7 +3,7 @@ extends CanvasLayer
 func _ready():
 	Global.hud_index = get_index()
 
-func _process(delta):
+func _process(_delta):
 	$Energy.value = Global.energy
 	$Hydration.value = Global.hydration
 
