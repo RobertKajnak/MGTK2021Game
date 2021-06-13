@@ -5,7 +5,7 @@ var hud_index := 0 # Used to update the HUD during collisions
 var current_level := 1
 
 # Player stuff
-var energy := 50
+var energy := 5000
 var hydration := 5000
 var genome := ""
 

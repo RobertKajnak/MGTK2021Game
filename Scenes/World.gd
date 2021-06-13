@@ -10,6 +10,9 @@ var paused := false
 onready var fog = $Fog
 onready var camera = $Player/Camera2D
 
+const GRID_WIDTH = 1000
+const GRID_HEIGHT = 1000
+var grid_map = {}
 
 var camera_position = Vector2.ZERO
 var sun_event_in_progress := false
@@ -52,20 +55,6 @@ func _ready():
 	fogImage.create(fog_image_width, fog_image_height, false, Image.FORMAT_RGBAH)
 	fogImage.fill(Color.black)
 	lightImage.convert(Image.FORMAT_RGBAH)
-	
-	# Spawn random RNA Fragments
-	for _i in range(6 + randi()%10):
-		var rna_obj = load("res://Scenes/RNA_Object.tscn").instance()
-		rna_obj.set_collision_callback(self, "update_genome")
-		# Check here for overlaps with objects (álmodj királylány)
-		rna_obj.position = Vector2(100+randi()%1150,50+randi()%660)
-		$RNA_nodes.add_child(rna_obj)
-	
-	# Spawn green food
-	for _i in range(6 + randi()%4):
-		var plant = load("res://Scenes/Food_object.tscn").instance()
-		plant.position = Vector2(100+randi()%1150,50+randi()%660)
-		$Plant_nodes.add_child(plant)
 		
 	var traits = Global.get_traits()
 	var has_sight = traits.has(Global.Trait.Sight)
@@ -73,6 +62,36 @@ func _ready():
 	
 	update_fog($Player.position)
 	start_sun_event()
+	
+func generate_flora(offsetx, offsety):
+	# Spawn random RNA Fragments
+	for _i in range(6 + randi()%10):
+		var rna_obj = load("res://Scenes/RNA_Object.tscn").instance()
+		rna_obj.set_collision_callback(self, "update_genome")
+		# Check here for overlaps with objects (álmodj királylány)
+		rna_obj.position = Vector2(offsetx + randi()%1000, offsety + randi()%1000)
+		$RNA_nodes.add_child(rna_obj)
+	
+	# Spawn green food
+	for _i in range(6 + randi()%4):
+		var plant = load("res://Scenes/Food_object.tscn").instance()
+		plant.position = Vector2(offsetx + randi()%1000,offsety + randi()%1000)
+		$Plant_nodes.add_child(plant)
+		
+	for _i in range(randi()%3):
+		var rock = load("res://res/models/Rock.tscn").instance()
+		rock.position = Vector2(offsetx + randi()%1000,offsety + randi()%1000)
+		$Rocks.add_child(rock)
+	
+func generate_grids():
+	var current_grid = Vector2(int($Player.position.x / 1000), int($Player.position.y / 1000)) * 1000;
+	
+	for i in range(-1,2):
+		for j in range(-1,2):
+			var modified_grid = Vector2(current_grid.x +i*1000 , current_grid.y +j*1000)
+			if not grid_map.has(modified_grid):
+				grid_map[modified_grid] = true
+				generate_flora(modified_grid.x, modified_grid.y)
 	
 func update_genome():
 	$HUD.refresh()
@@ -108,6 +127,8 @@ func update_fog_image_texture():
 	fog.position = camera.get_camera_screen_center() - player_start_position - Vector2(10,10)
 
 func _physics_process(delta):
+	var traits = Global.get_traits()
+	generate_grids()
 	if paused:
 		return
 	
@@ -119,6 +140,8 @@ func _physics_process(delta):
 		camera_position = $Player/Camera2D.get_camera_position()
 		player_position = $Player.position
 		
+#	check_raycast()
+	
 	#Sun event
 	if sun_event_in_progress:
 		$Sun.position = sun_start_pos + (sun_end_pos - sun_start_pos) * \
@@ -142,7 +165,13 @@ func _physics_process(delta):
 		die()
 		
 	current_time += delta
+	var energy_decay_modifier = 100
+	if traits.has(Global.Trait.Better_Core):
+		energy_decay_modifier = 40
+	Global.energy -= delta * energy_decay_modifier
 
+#func check_raycast():
+#	$Sun/Shadow.
 
 func die():
 	pause()

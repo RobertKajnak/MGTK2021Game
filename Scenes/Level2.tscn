@@ -17,6 +17,16 @@ blend_mode = 3
 [node name="World" type="Node2D"]
 script = ExtResource( 4 )
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
+
+[node name="World BG" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 1240, 680 )
+
+[node name="Background" type="Sprite" parent="ParallaxBackground/World BG"]
+texture = ExtResource( 5 )
+centered = false
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 636.667, 363.857 )
 collision_layer = 3
@@ -29,10 +39,6 @@ drag_margin_left = 0.4
 drag_margin_top = 0.4
 drag_margin_right = 0.4
 drag_margin_bottom = 0.4
-
-[node name="Rocks" type="Node2D" parent="."]
-
-[node name="Rock" parent="Rocks" instance=ExtResource( 11 )]
 
 [node name="Water" type="Sprite" parent="."]
 visible = false
@@ -48,6 +54,10 @@ script = ExtResource( 9 )
 
 [node name="Plant_nodes" type="Node2D" parent="."]
 
+[node name="Rocks" type="Node2D" parent="."]
+
+[node name="Rock" parent="Rocks" instance=ExtResource( 11 )]
+
 [node name="Fog" type="Sprite" parent="."]
 material = SubResource( 1 )
 centered = false
@@ -59,26 +69,17 @@ position = Vector2( -1412.09, -1018.42 )
 scale = Vector2( 1.51914, 1.36375 )
 texture = ExtResource( 2 )
 texture_scale = 8.28
+range_layer_min = -1
 shadow_enabled = true
 shadow_gradient_length = 1.2
 shadow_filter = 4
 shadow_filter_smooth = 2.0
 
-[node name="RayCast2D" type="RayCast2D" parent="Sun"]
+[node name="Shadow" type="RayCast2D" parent="Sun"]
 enabled = true
 
 [node name="SunTimer" type="Timer" parent="."]
 wait_time = 30.0
 autostart = true
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="World BG" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 1280, 720 )
-
-[node name="Background" type="Sprite" parent="ParallaxBackground/World BG"]
-position = Vector2( -9.26312, 4.02039 )
-texture = ExtResource( 5 )
-centered = false
 
 [connection signal="timeout" from="SunTimer" to="." method="_on_SunTimer_timeout"]
