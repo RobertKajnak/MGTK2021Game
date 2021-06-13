@@ -55,43 +55,43 @@ __meta__ = {
 }
 
 [node name="ContainerHP" type="HBoxContainer" parent="HUD/ContainerStats"]
-margin_right = 235.0
+margin_right = 209.0
 margin_bottom = 84.0
 custom_constants/separation = 6
 
 [node name="LabelHP" type="Label" parent="HUD/ContainerStats/ContainerHP"]
-margin_top = 16.0
-margin_right = 65.0
-margin_bottom = 68.0
+margin_top = 19.0
+margin_right = 55.0
+margin_bottom = 64.0
 custom_fonts/font = ExtResource( 2 )
 text = "HP:"
 
 [node name="LabelHPValue" type="Label" parent="HUD/ContainerStats/ContainerHP"]
-margin_left = 71.0
-margin_top = 16.0
-margin_right = 71.0
-margin_bottom = 68.0
+margin_left = 61.0
+margin_top = 19.0
+margin_right = 61.0
+margin_bottom = 64.0
 custom_fonts/font = ExtResource( 2 )
 
 [node name="VSeparator" type="VSeparator" parent="HUD/ContainerStats/ContainerHP"]
-margin_left = 77.0
-margin_right = 106.0
+margin_left = 67.0
+margin_right = 96.0
 margin_bottom = 84.0
 custom_constants/separation = 29
 
 [node name="LabelScore" type="Label" parent="HUD/ContainerStats/ContainerHP"]
-margin_left = 112.0
-margin_top = 16.0
-margin_right = 229.0
-margin_bottom = 68.0
+margin_left = 102.0
+margin_top = 19.0
+margin_right = 203.0
+margin_bottom = 64.0
 custom_fonts/font = ExtResource( 2 )
 text = "Score:"
 
 [node name="LabelScoreValue" type="Label" parent="HUD/ContainerStats/ContainerHP"]
-margin_left = 235.0
-margin_top = 16.0
-margin_right = 235.0
-margin_bottom = 68.0
+margin_left = 209.0
+margin_top = 19.0
+margin_right = 209.0
+margin_bottom = 64.0
 custom_fonts/font = ExtResource( 2 )
 
 [node name="LabelMessage" type="Label" parent="HUD"]
@@ -144,4 +144,5 @@ __meta__ = {
 [node name="BGSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
 autoplay = true
+
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

@@ -18,8 +18,19 @@ blend_mode = 3
 script = ExtResource( 4 )
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 640, 360 )
-scale = Vector2( 1, 1.003 )
+position = Vector2( 639.802, 360 )
+texture = ExtResource( 5 )
+
+[node name="Background4" type="Sprite" parent="."]
+position = Vector2( 1919.32, 359.841 )
+texture = ExtResource( 5 )
+
+[node name="Background3" type="Sprite" parent="."]
+position = Vector2( 1919.59, -359.741 )
+texture = ExtResource( 5 )
+
+[node name="Background2" type="Sprite" parent="."]
+position = Vector2( 639.832, -359.377 )
 texture = ExtResource( 5 )
 
 [node name="Water" type="Sprite" parent="."]
@@ -46,7 +57,7 @@ centered = false
 [node name="HUD" parent="." instance=ExtResource( 10 )]
 
 [node name="Sun" type="Light2D" parent="."]
-position = Vector2( -1444.73, -1010.57 )
+position = Vector2( -1412.09, -1012.07 )
 scale = Vector2( 1.51914, 1.36375 )
 texture = ExtResource( 2 )
 texture_scale = 8.28
