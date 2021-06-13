@@ -2,59 +2,26 @@
 
 [ext_resource path="res://res/Water2D/Water2D.gd" type="Script" id=1]
 [ext_resource path="res://res/Water2D/water_2D_material.tres" type="Material" id=2]
+[ext_resource path="res://Scenes/Water.gd" type="Script" id=3]
 [ext_resource path="res://res/Water2D/water_diffuse.png" type="Texture" id=4]
-[ext_resource path="res://res/textures/Light.png" type="Texture" id=5]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2( 360.637, 358.46 )
+polygon = PoolVector2Array( 103.363, -220.46, 195.363, -190.46, 202.363, -92.46, 125.363, -7.45999, 158.363, 82.54, 226.363, 120.54, 166.363, 187.54, 16.363, 196.54, -116.637, 181.54, -144.637, 82.54, -127.637, 20.54, -180.637, -68.46, -181.637, -151.46, -82.637, -234.46 )
 
 [node name="Water" type="Sprite" parent="."]
 modulate = Color( 0.490196, 0.490196, 0.490196, 0.792157 )
 light_mask = 16
 material = ExtResource( 2 )
-position = Vector2( 360.637, 359.46 )
-scale = Vector2( 2.81606, 2.81606 )
+position = Vector2( 362.637, 353.96 )
+scale = Vector2( 1.00781, 0.982422 )
 texture = ExtResource( 4 )
 script = ExtResource( 1 )
 
-[node name="Water2" type="Sprite" parent="."]
-modulate = Color( 0.490196, 0.490196, 0.490196, 0.792157 )
-light_mask = 16
-material = ExtResource( 2 )
-position = Vector2( 360.637, 334.262 )
-rotation = 1.5708
-scale = Vector2( 2.6192, 2.81606 )
-texture = ExtResource( 4 )
-script = ExtResource( 1 )
-
-[node name="Water3" type="Sprite" parent="."]
-modulate = Color( 0.490196, 0.490196, 0.490196, 0.792157 )
-light_mask = 16
-material = ExtResource( 2 )
-position = Vector2( 394.654, 359.46 )
-rotation = -3.14159
-scale = Vector2( 2.5503, 2.81606 )
-texture = ExtResource( 4 )
-script = ExtResource( 1 )
-
-[node name="Water4" type="Sprite" parent="."]
-modulate = Color( 0.490196, 0.490196, 0.490196, 0.792157 )
-light_mask = 16
-material = ExtResource( 2 )
-position = Vector2( 338.588, 386.548 )
-rotation = 4.71239
-scale = Vector2( 2.60443, 2.64381 )
-texture = ExtResource( 4 )
-script = ExtResource( 1 )
-
-[node name="Occlusuion" type="Light2D" parent="."]
-position = Vector2( 374.079, 359.374 )
-scale = Vector2( 2.62749, 2.54688 )
-texture = ExtResource( 5 )
-energy = 1.13
-mode = 3
-range_layer_min = -1
-range_item_cull_mask = 16
-shadow_gradient_length = 1.2
-shadow_filter = 4
-shadow_filter_smooth = 2.0
-shadow_item_cull_mask = 2
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

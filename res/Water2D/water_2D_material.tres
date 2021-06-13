@@ -6,7 +6,7 @@
 [resource]
 shader = ExtResource( 1 )
 shader_param/shadow_color = Color( 0.0352941, 0.243137, 0.568627, 1 )
-shader_param/tile_factor = 8.0
+shader_param/tile_factor = 1.0
 shader_param/aspect_ratio = 1.0
 shader_param/texture_offset_scale = Vector2( 1, 0.5 )
 shader_param/texture_offset_height = 0.04

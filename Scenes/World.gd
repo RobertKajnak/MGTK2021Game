@@ -84,15 +84,23 @@ func generate_flora(offsetx, offsety):
 		brown.position = Vector2(offsetx + randi()%1000,offsety + randi()%1000)
 		$Brown_nodes.add_child(brown)
 		
+	#Spawn Rocks
 	for _i in range(randi()%3):
 		var rock = load("res://res/models/Rock.tscn").instance()
 		rock.position = Vector2(offsetx + randi()%1000,offsety + randi()%1000)
 		$Rocks.add_child(rock)
 		
+	#Spawn Cells
 	for _i in range(1 + randi()%5):
 		var cell = load("res://Scenes/Food_object_cell.tscn").instance()
 		cell.position = Vector2(offsetx + randi()%1000,offsety + randi()%1000)
 		$Cell_nodes.add_child(cell)
+		
+	#Spawn Water
+	if randi()%2 == 0:
+		var water = load("res://Scenes/Water.tscn").instance()
+		water.position = Vector2(offsetx + randi()%1000,offsety + randi()%1000)
+		$Cell_nodes.add_child(water)
 	
 func generate_grids():
 	var current_grid = Vector2(int($Player.position.x / 1000), int($Player.position.y / 1000)) * 1000;
@@ -158,6 +166,12 @@ func _physics_process(delta):
 			update_fog($Player.position - ($Player/Camera2D.get_camera_position() - player_start_position))
 		camera_position = $Player/Camera2D.get_camera_position()
 		player_position = $Player.position
+	
+		#Water ingress
+	if Global.in_water>0:
+		Global.hydration += delta * sun_heavy_dry * 2
+		Global.hydration = min(Global.hydration, 9950)
+
 	
 	#Sun event
 	if sun_event_in_progress:
