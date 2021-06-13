@@ -18,9 +18,9 @@ var discovered_traits = []
 enum Trait { 
 	Movement, Speed, Absorption, Photosynthesis, Digestion, Water_Survival, 
 	Sight, Long_Vision, Sense_Cells, Poo_Eating, Virus, Water_Storage, 
-	Better_Core, Double_Core, Combustion, Nothing1, Nothing2, Nothing3, 
-	Nothing4, Inverse_Movement, Unstable_DNA, Giant, Color_Change, Chameleon, 
-	Halucination, Photosensivity, Jump
+	Better_Core, Nothing6, Nothing5, Nothing1, Nothing2, Nothing3, 
+	Nothing4, Inverse_Movement, Nothing7, Giant, Color_Change, Chameleon, 
+	Nothing8, Photosensivity, Jump
 	}
 
 func trait_to_text(trait: int):
@@ -38,18 +38,18 @@ func trait_to_text(trait: int):
 		Trait.Virus: return "Virus" 
 		Trait.Water_Storage: return "Water Storage" 
 		Trait.Better_Core: return "Better Core" 
-		Trait.Double_Core: return "Double Core" 
-		Trait.Combustion: return "Combustion" 
+		Trait.Nothing7: return "Nothing" 
+		Trait.Nothing5: return "Nothing" 
 		Trait.Nothing1: return "Nothing" 
 		Trait.Nothing2: return "Nothing" 
 		Trait.Nothing3: return "Nothing" 
 		Trait.Nothing4: return "Nothing" 
 		Trait.Inverse_Movement: return "Backwards" 
-		Trait.Unstable_DNA: return "Unstable DNA" 
+		Trait.Nothing8: return "Nothing" 
 		Trait.Giant: return "Giant" 
 		Trait.Color_Change: return "Color Change" 
 		Trait.Chameleon: return "Chameleon" 
-		Trait.Halucination: return "Halucination" 
+		Trait.Nothing6: return "Nothing" 
 		Trait.Photosensivity: return "Photosensivity" 
 		Trait.Jump: return "Jump"
 
@@ -68,18 +68,18 @@ func trait_to_color(trait: int):
 		Trait.Virus: return Color.red
 		Trait.Water_Storage: return Color.aqua
 		Trait.Better_Core: return Color.burlywood
-		Trait.Double_Core: return Color.burlywood
-		Trait.Combustion: return Color.red
+		Trait.Nothing7: return Color.gray
+		Trait.Nothing5: return Color.gray
 		Trait.Nothing1: return Color.gray
 		Trait.Nothing2: return Color.gray
 		Trait.Nothing3: return Color.gray
 		Trait.Nothing4: return Color.gray
 		Trait.Inverse_Movement: return Color.orange
-		Trait.Unstable_DNA: return Color.red
+		Trait.Nothing8: return Color.gray
 		Trait.Giant: return Color.gray
 		Trait.Color_Change: return Color.gray
 		Trait.Chameleon: return Color.gray
-		Trait.Halucination: return Color.blue
+		Trait.Nothing6: return Color.gray
 		Trait.Photosensivity: return Color.red
 		Trait.Jump: return Color.orange
 		

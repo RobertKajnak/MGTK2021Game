@@ -29,6 +29,8 @@ var display_height = ProjectSettings.get("display/window/size/height")
 var fogImage = Image.new()
 var fogTexture = ImageTexture.new()
 var lightImage = LightTexture.get_data()
+var lightImageWidth = 0
+var lightImageHeight = 0
 var light_offset = Vector2(LightTexture.get_width()/2, LightTexture.get_height()/2)
 
 var current_time = 0
@@ -55,11 +57,10 @@ func _ready():
 	fogImage.create(fog_image_width, fog_image_height, false, Image.FORMAT_RGBAH)
 	fogImage.fill(Color.black)
 	lightImage.convert(Image.FORMAT_RGBAH)
-		
-	var traits = Global.get_traits()
-	var has_sight = traits.has(Global.Trait.Sight)
-	update_vision_radius(NORMAL_SIGHT_MULTIPLIER if has_sight else SHORT_SIGHT_MULTIPLIER)
+	lightImageWidth = lightImage.get_width()
+	lightImageHeight = lightImage.get_height()
 	
+	update_vision_radius(NORMAL_SIGHT_MULTIPLIER)
 	update_fog($Player.position)
 	start_sun_event()
 	
@@ -111,7 +112,8 @@ func update_genome():
 		$Sun.energy = 1
 	
 func update_vision_radius(new_radius):
-	lightImage.resize(lightImage.get_width()*new_radius, lightImage.get_height()*new_radius)
+	print(new_radius)
+	lightImage.resize(lightImageWidth*new_radius, lightImageHeight*new_radius)
 	light_offset = Vector2(LightTexture.get_width()/2*new_radius, LightTexture.get_height()/2*new_radius)
 
 func update_fog(lightOffsetModifier):
@@ -141,6 +143,9 @@ func _physics_process(delta):
 		return
 	var traits = Global.get_traits()
 	generate_grids()	
+	
+	var has_sight = traits.has(Global.Trait.Sight)
+	update_vision_radius(NORMAL_SIGHT_MULTIPLIER if has_sight else SHORT_SIGHT_MULTIPLIER)
 	
 	# Only updates the flag, if the player has moved
 	if $Player.position != player_position:
@@ -174,8 +179,8 @@ func _physics_process(delta):
 			if current_time - sun_event_start_time >= sun_duration:
 				sun_event_in_progress = false
 	
-	# Combustion
-	if traits.has(Global.Trait.Combustion):
+	# Virus
+	if traits.has(Global.Trait.Virus):
 		Global.energy -= delta * 200 * 2
 		
 	if Global.hydration <= 0 or Global.energy <= 0:
@@ -183,7 +188,6 @@ func _physics_process(delta):
 		$HUD.die()
 		die()
 		
-	print(Global.DNACount)
 	if Global.DNACount >= 25:
 		win()
 		

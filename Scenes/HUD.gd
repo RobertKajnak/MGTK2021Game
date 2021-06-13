@@ -7,7 +7,6 @@ func _process(_delta) -> void:
 	$Energy.value = Global.energy
 	$Hydration.value = Global.hydration
 	$DNAPool.value = Global.DNACount
-	print()
 
 func refresh() -> void:
 	var genome = ""
