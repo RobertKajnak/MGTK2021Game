@@ -9,6 +9,7 @@ var energy := 5000
 var hydration := 5000
 var genome := ""
 var DNACount := 0
+var in_water := int(0)
 
 var letters_possible = ['A', 'T', 'G']
 var letter_to_color = { 'A': Color.red, 'T': Color.green, 'G': Color.yellow }
