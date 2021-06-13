@@ -1,13 +1,14 @@
 extends Control
 
 var counter = 1
+var tut_pressed = false
 
 func _ready():
 	#var _err = get_tree().change_scene("res://Scenes/Level2.tscn")
 	pass
 	
 func _process(delta):
-	if Input.is_action_just_pressed("ui_right"):
+	if Input.is_action_just_pressed("mouse") and tut_pressed:
 		match counter:
 			1:
 				$Tut2.visible = true
@@ -36,6 +37,7 @@ func _process(delta):
 				$CenterContainer/VBoxContainer/ButtonTutorial.disabled = false
 				$CenterContainer/VBoxContainer/ButtonStart.disabled = false
 				counter = 0
+				tut_pressed = false
 		counter += 1
 
 func _on_ButtonStart_pressed():
@@ -65,6 +67,7 @@ func _notification(what):
 
 func _on_ButtonTutorial_pressed():
 	$Tut1.visible = true
+	tut_pressed = true
 	$CenterContainer/VBoxContainer/ButtonExit.disabled = true
 	$CenterContainer/VBoxContainer/ButtonTutorial.disabled = true
 	$CenterContainer/VBoxContainer/ButtonStart.disabled = true
