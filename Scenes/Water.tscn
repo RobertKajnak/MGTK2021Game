@@ -3,7 +3,7 @@
 [ext_resource path="res://res/Water2D/Water2D.gd" type="Script" id=1]
 [ext_resource path="res://res/Water2D/water_2D_material.tres" type="Material" id=2]
 [ext_resource path="res://Scenes/Water.gd" type="Script" id=3]
-[ext_resource path="res://res/Water2D/water_diffuse.png" type="Texture" id=4]
+[ext_resource path="res://res/Water2D/water_diffuse_precut.png" type="Texture" id=4]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 3 )
@@ -18,8 +18,8 @@ polygon = PoolVector2Array( 103.363, -220.46, 195.363, -190.46, 202.363, -92.46,
 modulate = Color( 0.490196, 0.490196, 0.490196, 0.792157 )
 light_mask = 16
 material = ExtResource( 2 )
-position = Vector2( 362.637, 353.96 )
-scale = Vector2( 1.00781, 0.982422 )
+position = Vector2( 378.705, 329.203 )
+scale = Vector2( 1.07442, 1.05885 )
 texture = ExtResource( 4 )
 script = ExtResource( 1 )
 

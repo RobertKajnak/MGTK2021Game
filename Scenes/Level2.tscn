@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://res/textures/Light.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/Water.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/World.gd" type="Script" id=4]
 [ext_resource path="res://res/textures/background.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=10]
@@ -25,8 +24,6 @@ texture = ExtResource( 5 )
 centered = false
 
 [node name="BodiesOfWater" type="Node2D" parent="."]
-
-[node name="Node2D" parent="BodiesOfWater" instance=ExtResource( 3 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 636.667, 363.857 )
