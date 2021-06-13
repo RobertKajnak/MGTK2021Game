@@ -93,7 +93,7 @@ func jump_move(traits):
 			jump_time = current_time
 	
 func regular_move(traits):
-	var can_move = traits.has(Global.Trait.Movement)
+	var can_move = traits.has(Global.Trait.Movement) or traits.has(Global.Trait.Inverse_Movement) or traits.has(Global.Trait.Speed)
 	var is_fast = traits.has(Global.Trait.Speed)
 	var inverse_movement = traits.has(Global.Trait.Inverse_Movement)
 	
