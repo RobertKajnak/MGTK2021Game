@@ -48,7 +48,7 @@ func _ready():
 	
 	Global.genome = \
 		Global.trait_to_gene[Global.Trait.Movement] + \
-		Global.trait_to_gene[Global.Trait.Absorption] + \
+		Global.trait_to_gene[Global.Trait.Digestion] + \
 		Global.trait_to_gene[Global.Trait.Sight]
 	update_genome()
 	
@@ -76,6 +76,12 @@ func generate_flora(offsetx, offsety):
 		var plant = load("res://Scenes/Food_object.tscn").instance()
 		plant.position = Vector2(offsetx + randi()%1000,offsety + randi()%1000)
 		$Plant_nodes.add_child(plant)
+		
+	# Spawn brown food
+	for _i in range(3 + randi()%2):
+		var brown = load("res://Scenes/Food_object_brown.tscn").instance()
+		brown.position = Vector2(offsetx + randi()%1000,offsety + randi()%1000)
+		$Brown_nodes.add_child(brown)
 		
 	for _i in range(randi()%3):
 		var rock = load("res://res/models/Rock.tscn").instance()
@@ -138,25 +144,33 @@ func _physics_process(delta):
 			update_fog($Player.position - ($Player/Camera2D.get_camera_position() - player_start_position))
 		camera_position = $Player/Camera2D.get_camera_position()
 		player_position = $Player.position
-		
-#	check_raycast()
 	
 	#Sun event
 	if sun_event_in_progress:
 		$Sun.position = sun_start_pos + (sun_end_pos - sun_start_pos) * \
 						((current_time - sun_event_start_time) / sun_duration) + ($Player/Camera2D.get_camera_position() - player_start_position)
+		var in_shadow = not check_raycast()
 		var sun_dist = $Sun.position.distance_to($Player.position)
-		
-		if sun_dist<1050:
-			Global.hydration -= delta*sun_heavy_dry * $Sun.energy
-			#var dir = $Player.position.direction_to($Sun.position)
-			#var dir = $Sun/RayCast2D.cast_to($Player.position)
-			#print(dir)
-		elif sun_dist<1550:
-			Global.hydration -= delta*sun_light_dry * $Sun.energy
-			
-		if current_time - sun_event_start_time >= sun_duration:
-			sun_event_in_progress = false
+		var hydration_modifier = 0
+		if not in_shadow:
+			if sun_dist<1050:
+				hydration_modifier=delta*sun_heavy_dry * $Sun.energy
+				if traits.has(Global.Trait.Water_Storage):						
+					 hydration_modifier/=3		
+									
+				if traits.has(Global.Trait.Photosynthesis):
+					Global.energy += delta*sun_heavy_dry * $Sun.energy * 2
+			elif sun_dist<1550:
+				hydration_modifier=delta*sun_light_dry * $Sun.energy
+				if traits.has(Global.Trait.Water_Storage):						
+					 hydration_modifier/=3	
+										
+				if traits.has(Global.Trait.Photosynthesis):
+					Global.energy += delta*sun_heavy_dry * $Sun.energy * 2
+			print(hydration_modifier)
+			Global.hydration -= hydration_modifier
+			if current_time - sun_event_start_time >= sun_duration:
+				sun_event_in_progress = false
 		
 	if Global.hydration <= 0 or Global.energy <= 0:
 		$Player.die()
@@ -169,8 +183,14 @@ func _physics_process(delta):
 		energy_decay_modifier = 40
 	Global.energy -= delta * energy_decay_modifier
 
-#func check_raycast():
-#	$Sun/Shadow.
+func check_raycast():
+	var space_state = get_world_2d().get_direct_space_state()
+	# use global coordinates, not local to node
+	var result = space_state.intersect_ray( $Sun.position, $Player.position )
+	if result['collider_id'] == 1295:
+		return true
+	else:
+		return false
 
 func die():
 	pause()

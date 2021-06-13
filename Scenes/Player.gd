@@ -8,7 +8,14 @@ export (float) var friction = 0.1
 
 var is_dead := false
 
-func _physics_process(_delta):
+var current_time = 0
+
+var jump_time = 0
+
+var anim_tics = 0
+onready var anim_pl_pos = position
+
+func _physics_process(delta):
 	if is_dead:
 		return 
 		
@@ -25,6 +32,17 @@ func _physics_process(_delta):
 	get_input(traits) # Gyuri: nem szuper h minden updatenel meghivjuk
 	velocity = move_and_slide(velocity)
 	
+	anim_tics+=delta
+	if anim_tics>=0.1:
+		anim_tics = 0
+		if anim_pl_pos.distance_to(position) > 2:
+			$PlayerTexture.playing = true
+		else:
+			$PlayerTexture.playing = false
+		anim_pl_pos = Vector2(int(position.x),int(position.y))
+	
+	current_time += delta
+	
 func die():
 	is_dead = true
 
@@ -33,7 +51,7 @@ func get_input(traits):
 	jump_move(traits)
 	
 func jump_move(traits):
-	var can_jump = traits.has(Global.Trait.Jump)
+	var can_jump = true#traits.has(Global.Trait.Jump)
 	var inverse_movement = traits.has(Global.Trait.Inverse_Movement)
 	
 	var unit = JUMP_DISTANCE if not inverse_movement else -JUMP_DISTANCE
@@ -42,24 +60,28 @@ func jump_move(traits):
 	var input_dir_y = 0
 	
 	if can_jump and Input.is_action_pressed("jump"):
-		if Input.is_action_pressed("right"):
-			input_dir_x += unit
-		if Input.is_action_pressed("left"):
-			input_dir_x -= unit
-		if Input.is_action_pressed("up"):
-			input_dir_y -= unit
-		if Input.is_action_pressed("down"):
-			input_dir_y += unit
-	
-		if input_dir_x != 0:
-			velocity.x = lerp(velocity.x, input_dir_x, acceleration)
-		else:
-			velocity.x = lerp(velocity.x, 0, friction)
+		if (current_time-jump_time)<0.2:
+			if Input.is_action_pressed("right"):
+				input_dir_x += unit
+			if Input.is_action_pressed("left"):
+				input_dir_x -= unit
+			if Input.is_action_pressed("up"):
+				input_dir_y -= unit
+			if Input.is_action_pressed("down"):
+				input_dir_y += unit
+		
+			if input_dir_x != 0:
+				velocity.x = lerp(velocity.x, input_dir_x, acceleration)
+			else:
+				velocity.x = lerp(velocity.x, 0, friction)
 
-		if input_dir_y != 0:
-			velocity.y = lerp(velocity.y, input_dir_y, acceleration)
-		else:
-			velocity.y = lerp(velocity.y, 0, friction)
+			if input_dir_y != 0:
+				velocity.y = lerp(velocity.y, input_dir_y, acceleration)
+			else:
+				velocity.y = lerp(velocity.y, 0, friction)
+				
+		if (current_time-jump_time)>1.2:
+			jump_time = current_time
 	
 func regular_move(traits):
 	var can_move = traits.has(Global.Trait.Movement)
@@ -81,6 +103,9 @@ func regular_move(traits):
 		if Input.is_action_pressed("down"):
 			input_dir_y += unit
 			
+	#Doesn't help
+	#if input_dir_x != 0 or input_dir_y !=0:
+	#	$PlayerTexture.playing = true
 	speed = 300 if is_fast else 150
 
 	if input_dir_x != 0:
