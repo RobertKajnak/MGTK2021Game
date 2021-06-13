@@ -90,7 +90,6 @@ func generate_grids():
 		for j in range(-1,2):
 			var modified_grid = Vector2(current_grid.x +i*1000 , current_grid.y +j*1000)
 			if not grid_map.has(modified_grid):
-				print(modified_grid)
 				grid_map[modified_grid] = true
 				generate_flora(modified_grid.x, modified_grid.y)
 	
@@ -128,6 +127,7 @@ func update_fog_image_texture():
 	fog.position = camera.get_camera_screen_center() - player_start_position - Vector2(10,10)
 
 func _physics_process(delta):
+	var traits = Global.get_traits()
 	generate_grids()
 	if paused:
 		return
@@ -140,6 +140,8 @@ func _physics_process(delta):
 		camera_position = $Player/Camera2D.get_camera_position()
 		player_position = $Player.position
 		
+#	check_raycast()
+	
 	#Sun event
 	if sun_event_in_progress:
 		$Sun.position = sun_start_pos + (sun_end_pos - sun_start_pos) * \
@@ -163,7 +165,13 @@ func _physics_process(delta):
 		die()
 		
 	current_time += delta
+	var energy_decay_modifier = 100
+	if traits.has(Global.Trait.Better_Core):
+		energy_decay_modifier = 40
+	Global.energy -= delta * energy_decay_modifier
 
+#func check_raycast():
+#	$Sun/Shadow.
 
 func die():
 	pause()

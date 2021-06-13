@@ -13,6 +13,6 @@ func get_hub():
 func _on_Plant_body_entered(body):
 	var traits = Global.get_traits()
 	var can_eat = traits.has(Global.Trait.Absorption)
-	if can_eat and Global.energy < 100:
-		Global.energy = min(100, Global.energy + 20)
+	if can_eat and Global.energy < 5000:
+		Global.energy = min(5000, Global.energy + 50)
 		queue_free()
