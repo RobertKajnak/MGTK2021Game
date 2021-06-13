@@ -14,12 +14,15 @@ __meta__ = {
 }
 
 [node name="LabelHeader" type="Label" parent="."]
-margin_right = 218.0
+margin_right = 300.0
 margin_bottom = 45.0
 custom_fonts/font = ExtResource( 2 )
 text = "Known Traits:"
 
-[node name="TraitList" type="VBoxContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 margin_top = 49.0
-margin_right = 218.0
-margin_bottom = 49.0
+margin_right = 250.0
+margin_bottom = 549.0
+rect_min_size = Vector2( 250, 500 )
+
+[node name="TraitList" type="VBoxContainer" parent="ScrollContainer"]

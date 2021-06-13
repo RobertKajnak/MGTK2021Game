@@ -29,7 +29,7 @@ func trait_to_text(trait: int):
 		Trait.Absorption: return "Absorption"
 		Trait.Photosynthesis: return "Photosynthesis" 
 		Trait.Digestion: return "Digestion" 
-		Trait.Water_Survival: return "Water Survival" 
+		Trait.Water_Survival: return "Hydrophilia" 
 		Trait.Sight: return "Sight" 
 		Trait.Long_Vision: return "Long Vision" 
 		Trait.Sense_Cells: return "Sense Cells" 
@@ -43,13 +43,13 @@ func trait_to_text(trait: int):
 		Trait.Nothing2: return "Nothing" 
 		Trait.Nothing3: return "Nothing" 
 		Trait.Nothing4: return "Nothing" 
-		Trait.Inverse_Movement: return "Inverse Movement" 
+		Trait.Inverse_Movement: return "Backwards" 
 		Trait.Unstable_DNA: return "Unstable DNA" 
 		Trait.Giant: return "Giant" 
 		Trait.Color_Change: return "Color Change" 
 		Trait.Chameleon: return "Chameleon" 
 		Trait.Halucination: return "Halucination" 
-		Trait.Photosensivity: return "Photosensibility" 
+		Trait.Photosensivity: return "Photosensivity" 
 		Trait.Jump: return "Jump"
 
 func trait_to_color(trait: int): 
@@ -66,8 +66,8 @@ func trait_to_color(trait: int):
 		Trait.Poo_Eating: return Color.aquamarine
 		Trait.Virus: return Color.red
 		Trait.Water_Storage: return Color.aqua
-		Trait.Better_Core: return Color.black
-		Trait.Double_Core: return Color.black
+		Trait.Better_Core: return Color.burlywood
+		Trait.Double_Core: return Color.burlywood
 		Trait.Combustion: return Color.red
 		Trait.Nothing1: return Color.gray
 		Trait.Nothing2: return Color.gray

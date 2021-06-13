@@ -12,5 +12,5 @@ func _ready():
 
 func add_trait(gene):
 	var trait_elem = load("res://Scenes/KnowTrait_HUD.tscn").instance()
-	$TraitList.add_child(trait_elem)
+	$ScrollContainer/TraitList.add_child(trait_elem)
 	trait_elem.set_trait(gene)
