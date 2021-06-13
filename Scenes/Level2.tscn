@@ -21,7 +21,7 @@ script = ExtResource( 4 )
 layer = -1
 
 [node name="World BG" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 1280, 720 )
+motion_mirroring = Vector2( 1240, 680 )
 
 [node name="Background" type="Sprite" parent="ParallaxBackground/World BG"]
 texture = ExtResource( 5 )
