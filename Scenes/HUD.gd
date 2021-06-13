@@ -34,3 +34,4 @@ func die():
 	$Energy.set_modulate(Color.darkgray)
 	$Hydration.set_modulate(Color.darkgray)
 	$ContainerDNA.set_modulate(Color.darkgray)
+	$LabelDied.visible = true

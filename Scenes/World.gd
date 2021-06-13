@@ -3,12 +3,15 @@ extends Node2D
 const LightTexture = preload("res://res/textures/Light.png")
 const NORMAL_SIGHT_MULTIPLIER = 2.0
 const SHORT_SIGHT_MULTIPLIER = 0.5
+var player_start_position = Vector2.ZERO
 
 var paused := false
 
 onready var fog = $Fog
+onready var camera = $Player/Camera2D
 
 
+var camera_position = Vector2.ZERO
 var sun_event_in_progress := false
 var sun_event_start_time 
 var sun_start_pos = Vector2(-1400,-1400)
@@ -34,10 +37,12 @@ onready var player_position = $Player.position
 func _ready():
 	randomize()
 	
-	#$Player/Camera2D.position = $Player.position
+	player_start_position = $Player.position
+	var camera_position = $Player/Camera2D.get_camera_position()
 	
-	var fog_image_width = display_width
-	var fog_image_height = display_height
+	var fog_image_width = display_width + 20
+	var fog_image_height = display_height + 20
+	
 	Global.genome = \
 		Global.trait_to_gene[Global.Trait.Movement] + \
 		Global.trait_to_gene[Global.Trait.Absorption] + \
@@ -65,8 +70,8 @@ func _ready():
 	var traits = Global.get_traits()
 	var has_sight = traits.has(Global.Trait.Sight)
 	update_vision_radius(NORMAL_SIGHT_MULTIPLIER if has_sight else SHORT_SIGHT_MULTIPLIER)
-	update_fog($Player.position)
 	
+	update_fog($Player.position)
 	start_sun_event()
 	
 func update_genome():
@@ -80,7 +85,7 @@ func update_vision_radius(new_radius):
 	lightImage.resize(lightImage.get_width()*new_radius, lightImage.get_height()*new_radius)
 	light_offset = Vector2(LightTexture.get_width()/2*new_radius, LightTexture.get_height()/2*new_radius)
 
-func update_fog(new_grid_position):
+func update_fog(lightOffsetModifier):
 	var traits = Global.get_traits()
 	var has_long_sight = traits.has(Global.Trait.Long_Vision)
 	fog.visible = not has_long_sight
@@ -91,7 +96,7 @@ func update_fog(new_grid_position):
 	
 	fogImage.fill(Color.black)
 	var light_rect = Rect2(Vector2.ZERO, Vector2(lightImage.get_width(), lightImage.get_height()))
-	fogImage.blend_rect(lightImage, light_rect, new_grid_position - light_offset)
+	fogImage.blend_rect(lightImage, light_rect, lightOffsetModifier - light_offset)
 
 	fogImage.unlock()
 	lightImage.unlock()
@@ -100,6 +105,7 @@ func update_fog(new_grid_position):
 func update_fog_image_texture():
 	fogTexture.create_from_image(fogImage)
 	fog.texture = fogTexture
+	fog.position = camera.get_camera_screen_center() - player_start_position - Vector2(10,10)
 
 func _physics_process(delta):
 	if paused:
@@ -108,17 +114,22 @@ func _physics_process(delta):
 	# Only updates the flag, if the player has moved
 	if $Player.position != player_position:
 		if $Player.position.distance_to(player_position) > 0.1:
-			update_fog($Player.position)
+			#Camera moves instead of player
+			update_fog($Player.position - ($Player/Camera2D.get_camera_position() - player_start_position))
+		camera_position = $Player/Camera2D.get_camera_position()
 		player_position = $Player.position
 		
 	#Sun event
 	if sun_event_in_progress:
 		$Sun.position = sun_start_pos + (sun_end_pos - sun_start_pos) * \
-						((current_time - sun_event_start_time) / sun_duration)
+						((current_time - sun_event_start_time) / sun_duration) + ($Player/Camera2D.get_camera_position() - player_start_position)
 		var sun_dist = $Sun.position.distance_to($Player.position)
 		
 		if sun_dist<1050:
 			Global.hydration -= delta*sun_heavy_dry * $Sun.energy
+			#var dir = $Player.position.direction_to($Sun.position)
+			#var dir = $Sun/RayCast2D.cast_to($Player.position)
+			#print(dir)
 		elif sun_dist<1550:
 			Global.hydration -= delta*sun_light_dry * $Sun.energy
 			
@@ -135,7 +146,6 @@ func _physics_process(delta):
 
 func die():
 	pause()
-	$LabelDied.visible = true
 	
 func pause():
 	paused = true
