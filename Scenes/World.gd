@@ -50,7 +50,7 @@ func _ready():
 	
 	Global.genome = \
 		Global.trait_to_gene[Global.Trait.Movement] + \
-		Global.trait_to_gene[Global.Trait.Sense_Cells] + \
+		Global.trait_to_gene[Global.Trait.Absorption] + \
 		Global.trait_to_gene[Global.Trait.Sight]
 	update_genome()
 	
@@ -221,10 +221,12 @@ func win():
 	pause()
 	
 func pause():
-	paused = true
-	
-func unpause():
-	paused = false
+	if paused:
+		$Player.paused = false
+		paused = false
+	else:
+		$Player.paused = true
+		paused = true
 
 func start_sun_event():
 	sun_event_in_progress = true
@@ -240,7 +242,9 @@ func _unhandled_input(event):
 		if event.pressed:
 			if event.scancode == KEY_ESCAPE:
 				exit_game() 
-				
+			if event.scancode == KEY_P:
+				$HUD.pause()
+				pause()
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		# For Windows, if 'x' is clicked, alt-f4 etc.

@@ -162,6 +162,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Paused" type="Label" parent="."]
+visible = false
+margin_left = 494.019
+margin_top = 266.791
+margin_right = 838.019
+margin_bottom = 370.791
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Paused"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="KnownTraitContainer" parent="." instance=ExtResource( 5 )]
 margin_left = 18.0
 margin_top = 145.0

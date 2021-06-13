@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+var paused := false
+
 func _ready():
 	Global.hud_object = self
 
@@ -37,6 +39,14 @@ func playEffect(effect = 'nom_' + String(randi() % 7 + 1) + ".ogg"):
 	
 func win() -> void:
 	$LabelVictory.visible = true
+	
+func pause():
+	if paused:
+		paused = false
+		$Paused.visible = false
+	else:
+		paused = true
+		$Paused.visible = true
 
 func die() -> void:
 	$Energy.set_modulate(Color.darkgray)

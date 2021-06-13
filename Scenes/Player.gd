@@ -6,6 +6,7 @@ const JUMP_DISTANCE = 800
 export (float) var acceleration = 0.5
 export (float) var friction = 0.1
 
+var paused := false
 var is_dead := false
 
 var current_time = 0
@@ -16,7 +17,7 @@ var anim_tics = 0
 onready var anim_pl_pos = position
 
 func _physics_process(delta):
-	if is_dead:
+	if is_dead or paused:
 		return 
 	
 	var color = Color(0.1,0.1,0.5)
