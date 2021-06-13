@@ -48,7 +48,7 @@ func _ready():
 	
 	Global.genome = \
 		Global.trait_to_gene[Global.Trait.Movement] + \
-		Global.trait_to_gene[Global.Trait.Absorption] + \
+		Global.trait_to_gene[Global.Trait.Photosynthesis] + \
 		Global.trait_to_gene[Global.Trait.Sight]
 	update_genome()
 	
@@ -150,8 +150,12 @@ func _physics_process(delta):
 		if not in_shadow:
 			if sun_dist<1050:
 				Global.hydration -= delta*sun_heavy_dry * $Sun.energy
+				if traits.has(Global.Trait.Photosynthesis):
+					Global.energy += delta*sun_heavy_dry * $Sun.energy * 2
 			elif sun_dist<1550:
 				Global.hydration -= delta*sun_light_dry * $Sun.energy
+				if traits.has(Global.Trait.Photosynthesis):
+					Global.energy += delta*sun_heavy_dry * $Sun.energy * 2
 				
 			if current_time - sun_event_start_time >= sun_duration:
 				sun_event_in_progress = false
