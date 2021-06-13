@@ -49,9 +49,9 @@ func _ready():
 	var fog_image_height = display_height + 20
 	
 	Global.genome = \
-		Global.trait_to_gene[Global.Trait.Movement] + \
 		Global.trait_to_gene[Global.Trait.Absorption] + \
-		Global.trait_to_gene[Global.Trait.Sight]
+		Global.trait_to_gene[Global.Trait.Sight] + \
+		Global.trait_to_gene[Global.Trait.Movement]
 	update_genome()
 	
 	fogImage.create(fog_image_width, fog_image_height, false, Image.FORMAT_RGBAH)
@@ -155,7 +155,7 @@ func _physics_process(delta):
 	update_vision_radius(NORMAL_SIGHT_MULTIPLIER if has_sight else SHORT_SIGHT_MULTIPLIER)
 	var sense_cells = traits.has(Global.Trait.Sense_Cells)
 	if sense_cells:
-		$Cell_nodes.z_index = 10
+		$Cell_nodes.z_index = 2
 	else:
 		$Cell_nodes.z_index = 0
 	
