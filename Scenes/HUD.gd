@@ -26,7 +26,7 @@ func generate_dna_segment(gene: String, gene_index: int) -> void:
 	
 	if len(gene) == len(Global.letters_possible) and not Global.discovered_traits.has(gene):
 		Global.discovered_traits.append(gene)
-		$ScrollContainer/KnownTraitContainer.add_trait(gene)
+		$KnownTraitContainer.add_trait(gene)
 		
 
 func die() -> void:

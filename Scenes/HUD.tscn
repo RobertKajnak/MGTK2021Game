@@ -64,17 +64,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="KnownTraitContainer" parent="." instance=ExtResource( 5 )]
 margin_left = 18.0
 margin_top = 145.0
-margin_right = 328.0
-margin_bottom = 692.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="KnownTraitContainer" parent="ScrollContainer" instance=ExtResource( 5 )]
-margin_left = 0.0
-margin_top = 0.0
-margin_right = 218.0
-margin_bottom = 49.0
+margin_right = 236.0
+margin_bottom = 194.0

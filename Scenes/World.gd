@@ -48,7 +48,7 @@ func _ready():
 	
 	Global.genome = \
 		Global.trait_to_gene[Global.Trait.Movement] + \
-		Global.trait_to_gene[Global.Trait.Digestion] + \
+		Global.trait_to_gene[Global.Trait.Photosensivity] + \
 		Global.trait_to_gene[Global.Trait.Sight]
 	update_genome()
 	
