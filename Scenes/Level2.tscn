@@ -54,6 +54,8 @@ script = ExtResource( 9 )
 
 [node name="Plant_nodes" type="Node2D" parent="."]
 
+[node name="Brown_nodes" type="Node2D" parent="."]
+
 [node name="Rocks" type="Node2D" parent="."]
 
 [node name="Rock" parent="Rocks" instance=ExtResource( 11 )]

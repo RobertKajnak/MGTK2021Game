@@ -48,7 +48,7 @@ func _ready():
 	
 	Global.genome = \
 		Global.trait_to_gene[Global.Trait.Movement] + \
-		Global.trait_to_gene[Global.Trait.Water_Storage] + \
+		Global.trait_to_gene[Global.Trait.Digestion] + \
 		Global.trait_to_gene[Global.Trait.Sight]
 	update_genome()
 	
@@ -77,6 +77,12 @@ func generate_flora(offsetx, offsety):
 		var plant = load("res://Scenes/Food_object.tscn").instance()
 		plant.position = Vector2(offsetx + randi()%1000,offsety + randi()%1000)
 		$Plant_nodes.add_child(plant)
+		
+	# Spawn brown food
+	for _i in range(3 + randi()%2):
+		var brown = load("res://Scenes/Food_object_brown.tscn").instance()
+		brown.position = Vector2(offsetx + randi()%1000,offsety + randi()%1000)
+		$Brown_nodes.add_child(brown)
 		
 	for _i in range(randi()%3):
 		var rock = load("res://res/models/Rock.tscn").instance()
